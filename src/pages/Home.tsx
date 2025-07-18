@@ -485,87 +485,14 @@ const PartnersSection: React.FC = () => {
   // Filter out any undefined logos to prevent empty slots
   const partners = allPartners.filter(partner => partner.logo);
   
-  const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [itemsPerView, setItemsPerView] = useState(3);
-  
-  // Update items per view based on screen size
-  useEffect(() => {
-    const updateItemsPerView = () => {
-      if (window.innerWidth >= 1024) {
-        setItemsPerView(3); // lg+: 3 logos
-      } else if (window.innerWidth >= 768) {
-        setItemsPerView(2); // md: 2 logos
-      } else {
-        setItemsPerView(2); // sm: 2 logos (never collapse to 1)
-      }
-    };
-
-    updateItemsPerView();
-    window.addEventListener('resize', updateItemsPerView);
-    return () => window.removeEventListener('resize', updateItemsPerView);
-  }, []);
-
-  // Ensure we don't show more items than available partners
-  const effectiveItemsPerView = Math.min(itemsPerView, partners.length);
-
-  // Auto-advance carousel every 3 seconds
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      setCurrentPartnerIndex((prev) => {
-        const maxIndex = Math.max(0, partners.length - effectiveItemsPerView);
-        return prev >= maxIndex ? 0 : prev + 1;
-      });
-    }, 3000);
-    
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, partners.length, effectiveItemsPerView]);
-  
-  const nextPartner = () => {
-    const maxIndex = Math.max(0, partners.length - effectiveItemsPerView);
-    setCurrentPartnerIndex((prev) => prev >= maxIndex ? 0 : prev + 1);
-    setIsAutoPlaying(false);
-  };
-  
-  const prevPartner = () => {
-    const maxIndex = Math.max(0, partners.length - effectiveItemsPerView);
-    setCurrentPartnerIndex((prev) => prev <= 0 ? maxIndex : prev - 1);
-    setIsAutoPlaying(false);
-  };
-  
-  // Touch/swipe handling for mobile
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-  
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-  
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-    
-    if (isLeftSwipe) {
-      nextPartner();
-    }
-    if (isRightSwipe) {
-      prevPartner();
-    }
-  };
 
   // Don't render if no partners available
   if (partners.length === 0) {
     return null;
   }
+
+  // Duplicate partners array for seamless infinite scroll
+  const duplicatedPartners = [...partners, ...partners];
   return (
     <section ref={ref} className="py-12 sm:py-16 lg:py-20 bg-dark-100 border-t border-teal-500/20">
       <div className="container mx-auto px-4 sm:px-6">
@@ -594,58 +521,18 @@ const PartnersSection: React.FC = () => {
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-          {/* Navigation Arrows */}
-          {partners.length > effectiveItemsPerView && (
-            <>
-              <button
-                onClick={prevPartner}
-                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/70 transition-all duration-300 border border-white/20 hover:border-teal-400/50"
-                aria-label={language === 'en' ? 'Previous partners' : 'الشركاء السابقون'}
-              >
-                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-              </button>
-              <button
-                onClick={nextPartner}
-                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/70 transition-all duration-300 border border-white/20 hover:border-teal-400/50"
-                aria-label={language === 'en' ? 'Next partners' : 'الشركاء التاليون'}
-              >
-                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-              </button>
-            </>
-          )}
-          
-          {/* Logo Carousel Container with subtle background strip */}
-          <div 
-            className="overflow-hidden bg-neutral-900/80 backdrop-blur-sm rounded-xl py-8 sm:py-12"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <motion.div 
-              className="flex gap-8 sm:gap-12 lg:gap-16 items-center justify-center"
-              animate={{ 
-                x: `-${currentPartnerIndex * (100 / effectiveItemsPerView)}%` 
-              }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 30,
-                duration: 0.5 
-              }}
-              style={{ 
-                width: `${(partners.length / effectiveItemsPerView) * 100}%`
-              }}
-            >
-              {partners.map((partner, index) => (
+          {/* Seamless Scrolling Logo Banner */}
+          <div className="bg-teal-500/5 backdrop-blur-sm rounded-xl py-8 sm:py-12 overflow-hidden">
+            <div className="flex animate-scroll">
+              {duplicatedPartners.map((partner, index) => (
                 <div
-                  key={index}
-                  className="flex-shrink-0 group flex items-center justify-center"
-                  style={{ width: `${100 / partners.length}%` }}
+                  key={`${partner.name}-${index}`}
+                  className="flex-shrink-0 flex items-center justify-center mx-8 sm:mx-12 lg:mx-16"
                 >
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="max-h-32 w-auto object-contain opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-in-out filter drop-shadow-lg"
+                    className="max-h-32 w-auto object-contain hover:scale-105 transition-all duration-300 ease-in-out filter drop-shadow-lg"
                     loading="eager"
                     onError={(e) => {
                       // Hide broken images gracefully
@@ -655,29 +542,8 @@ const PartnersSection: React.FC = () => {
                   />
                 </div>
               ))}
-            </motion.div>
-          </div>
-          
-          {/* Progress Indicators */}
-          {partners.length > effectiveItemsPerView && (
-            <div className="flex justify-center mt-8 space-x-3">
-              {Array.from({ length: Math.max(1, partners.length - effectiveItemsPerView + 1) }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setCurrentPartnerIndex(index);
-                    setIsAutoPlaying(false);
-                  }}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    currentPartnerIndex === index 
-                      ? 'bg-teal-400 w-8' 
-                      : 'bg-white/50 hover:bg-white/70'
-                  }`}
-                  aria-label={`${language === 'en' ? 'Go to slide' : 'انتقل إلى الشريحة'} ${index + 1}`}
-                />
-              ))}
             </div>
-          )}
+          </div>
         </motion.div>
       </div>
     </section>
