@@ -303,8 +303,8 @@ const AboutSection: React.FC = () => {
           </motion.div>
 
           <motion.div
-            initial={{ x: 50, opacity: 1 }}
-            animate={inView ? { x: 0, opacity: 1 } : { x: 50, opacity: 1 }}
+            initial={{ x: 50, opacity: 0 }}
+            animate={inView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex justify-center"
           >
@@ -470,6 +470,7 @@ const PartnersSection: React.FC = () => {
     { name: 'IDEX IST', logo: '/images/idex-ist-300x184.png' },
     { name: 'IDEX', logo: '/images/idex-300x184.png' },
     { name: 'Untitled 1', logo: '/images/Untitled-1-300x184.png' },
+  ];
   
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -622,19 +623,19 @@ const PartnersSection: React.FC = () => {
                   style={{ width: `${100 / partners.length}%` }}
                 >
                   <div className="relative w-full h-16 sm:h-20 lg:h-24 bg-white/5 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 shadow-lg hover:shadow-xl p-3 sm:p-4">
-                  <div className="bg-white/10 rounded-xl backdrop-blur-sm p-3 shadow">
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className="w-full h-auto max-h-20 object-contain opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300"
-                      loading="lazy"
-                      onError={(e) => {
-                        // Fallback for broken images
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                      }}
-                    />
-                  </div>
+                    <div className="bg-white/10 rounded-xl backdrop-blur-sm p-3 shadow">
+                      <img
+                        src={partner.logo}
+                        alt={partner.name}
+                        className="w-full h-auto max-h-20 object-contain opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300"
+                        loading="lazy"
+                        onError={(e) => {
+                          // Fallback for broken images
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               ))}
