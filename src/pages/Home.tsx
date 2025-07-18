@@ -468,8 +468,8 @@ const PartnersSection: React.FC = () => {
   const { language } = useLanguage();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  // Partner logos from uploaded files
-  const partners = [
+  // Partner logos - filter out any undefined/missing logos
+  const allPartners = [
     { name: 'Logo 1', logo: logo1 },
     { name: 'Logo 2', logo: logo2 },
     { name: 'Logo 3', logo: logo3 },
@@ -482,26 +482,9 @@ const PartnersSection: React.FC = () => {
     { name: 'Logo 10', logo: logo10 }
   ];
   
-  // 🕵️ DIAGNOSTIC: Log partner URLs and check if they resolve
-  React.useEffect(() => {
-    console.log('🔍 PARTNERS DIAGNOSTIC - URLs being used:');
-    partners.forEach((partner, index) => {
-      console.log(`Partner ${index + 1}: ${partner.logo}`);
-      
-      // Test if URL is accessible
-      fetch(partner.logo)
-        .then(response => {
-          console.log(`✅ ${partner.logo} - Status: ${response.status} ${response.statusText}`);
-          if (!response.ok) {
-            console.error(`❌ ${partner.logo} failed with status ${response.status}`);
-          }
-        })
-        .catch(error => {
-          console.error(`❌ ${partner.logo} fetch error:`, error);
-        });
-    });
-  }, []);
-
+  // Filter out any undefined logos to prevent empty slots
+  const partners = allPartners.filter(partner => partner.logo);
+  
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [itemsPerView, setItemsPerView] = useState(3);
@@ -523,28 +506,31 @@ const PartnersSection: React.FC = () => {
     return () => window.removeEventListener('resize', updateItemsPerView);
   }, []);
 
+  // Ensure we don't show more items than available partners
+  const effectiveItemsPerView = Math.min(itemsPerView, partners.length);
+
   // Auto-advance carousel every 3 seconds
   useEffect(() => {
     if (!isAutoPlaying) return;
     
     const interval = setInterval(() => {
       setCurrentPartnerIndex((prev) => {
-        const maxIndex = Math.max(0, partners.length - itemsPerView);
+        const maxIndex = Math.max(0, partners.length - effectiveItemsPerView);
         return prev >= maxIndex ? 0 : prev + 1;
       });
     }, 3000);
     
     return () => clearInterval(interval);
-  }, [isAutoPlaying, partners.length, itemsPerView]);
+  }, [isAutoPlaying, partners.length, effectiveItemsPerView]);
   
   const nextPartner = () => {
-    const maxIndex = Math.max(0, partners.length - itemsPerView);
+    const maxIndex = Math.max(0, partners.length - effectiveItemsPerView);
     setCurrentPartnerIndex((prev) => prev >= maxIndex ? 0 : prev + 1);
     setIsAutoPlaying(false);
   };
   
   const prevPartner = () => {
-    const maxIndex = Math.max(0, partners.length - itemsPerView);
+    const maxIndex = Math.max(0, partners.length - effectiveItemsPerView);
     setCurrentPartnerIndex((prev) => prev <= 0 ? maxIndex : prev - 1);
     setIsAutoPlaying(false);
   };
@@ -576,6 +562,10 @@ const PartnersSection: React.FC = () => {
     }
   };
 
+  // Don't render if no partners available
+  if (partners.length === 0) {
+    return null;
+  }
   return (
     <section ref={ref} className="py-12 sm:py-16 lg:py-20 bg-dark-100 border-t border-teal-500/20">
       <div className="container mx-auto px-4 sm:px-6">
@@ -604,49 +594,37 @@ const PartnersSection: React.FC = () => {
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-          {/* 🕵️ DIAGNOSTIC: Log intersection observer and visibility state */}
-          {React.useEffect(() => {
-            console.log('🔍 PARTNERS SECTION DIAGNOSTIC:', {
-              inView,
-              partnersCount: partners.length,
-              itemsPerView,
-              currentPartnerIndex,
-              isAutoPlaying,
-              sectionVisible: inView ? 'YES' : 'NO'
-            });
-          }, [inView, partners.length, itemsPerView, currentPartnerIndex, isAutoPlaying])}
-          
           {/* Navigation Arrows */}
-          {partners.length > itemsPerView && (
+          {partners.length > effectiveItemsPerView && (
             <>
               <button
                 onClick={prevPartner}
-                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-300 border border-white/20"
+                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/70 transition-all duration-300 border border-white/20 hover:border-teal-400/50"
                 aria-label={language === 'en' ? 'Previous partners' : 'الشركاء السابقون'}
               >
-                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </button>
               <button
                 onClick={nextPartner}
-                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-300 border border-white/20"
+                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/70 transition-all duration-300 border border-white/20 hover:border-teal-400/50"
                 aria-label={language === 'en' ? 'Next partners' : 'الشركاء التاليون'}
               >
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </button>
             </>
           )}
           
-          {/* Logo Carousel Container */}
+          {/* Logo Carousel Container with subtle background strip */}
           <div 
-            className="overflow-hidden"
+            className="overflow-hidden bg-neutral-900/80 backdrop-blur-sm rounded-xl py-8 sm:py-12"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
             <motion.div 
-              className="flex gap-4 sm:gap-6 lg:gap-8"
+              className="flex gap-8 sm:gap-12 lg:gap-16 items-center justify-center"
               animate={{ 
-                x: `-${currentPartnerIndex * (100 / itemsPerView)}%` 
+                x: `-${currentPartnerIndex * (100 / effectiveItemsPerView)}%` 
               }}
               transition={{ 
                 type: "spring", 
@@ -655,49 +633,45 @@ const PartnersSection: React.FC = () => {
                 duration: 0.5 
               }}
               style={{ 
-                width: `${(partners.length / itemsPerView) * 100}%`
+                width: `${(partners.length / effectiveItemsPerView) * 100}%`
               }}
             >
               {partners.map((partner, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 group"
+                  className="flex-shrink-0 group flex items-center justify-center"
                   style={{ width: `${100 / partners.length}%` }}
                 >
-                  <div className="relative w-full h-16 sm:h-20 lg:h-24 bg-white/5 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 shadow-lg hover:shadow-xl p-3 sm:p-4">
-                    <div className="bg-white/10 rounded-xl backdrop-blur-sm p-3 shadow">
-                      <img
-                        src={partner.logo}
-                        alt={partner.name}
-                        className="w-full h-auto max-h-20 object-contain opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300"
-                        loading="eager"
-                        onError={(e) => {
-                          // Fallback for broken images
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                        }}
-                      />
-                    </div>
-                  </div>
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="max-h-32 w-auto object-contain opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-in-out filter drop-shadow-lg"
+                    loading="eager"
+                    onError={(e) => {
+                      // Hide broken images gracefully
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                  />
                 </div>
               ))}
             </motion.div>
           </div>
           
           {/* Progress Indicators */}
-          {partners.length > itemsPerView && (
-            <div className="flex justify-center mt-6 space-x-2">
-              {Array.from({ length: Math.max(1, partners.length - itemsPerView + 1) }).map((_, index) => (
+          {partners.length > effectiveItemsPerView && (
+            <div className="flex justify-center mt-8 space-x-3">
+              {Array.from({ length: Math.max(1, partners.length - effectiveItemsPerView + 1) }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => {
                     setCurrentPartnerIndex(index);
                     setIsAutoPlaying(false);
                   }}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     currentPartnerIndex === index 
-                      ? 'bg-teal-400 w-6' 
-                      : 'bg-white/40 hover:bg-white/60'
+                      ? 'bg-teal-400 w-8' 
+                      : 'bg-white/50 hover:bg-white/70'
                   }`}
                   aria-label={`${language === 'en' ? 'Go to slide' : 'انتقل إلى الشريحة'} ${index + 1}`}
                 />
