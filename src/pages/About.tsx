@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Target, Award, Lightbulb, Shield } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import teamImage from '../../public/images/Team-image-alhadath.png';
+import teamImage from '../assets/images/Team-image-alhadath.png';
 
 const About: React.FC = () => {
   const { t, language } = useLanguage();

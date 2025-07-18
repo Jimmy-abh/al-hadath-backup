@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Star, MessageCircle, ArrowRight } from 'luci
 import { useLanguage } from '../contexts/LanguageContext';
 import OptimizedImage from '../components/OptimizedImage';
 import { getOptimizedImageUrl } from '../utils/imageOptimization';
-import teamImage from '../../public/images/Team-image-alhadath.png';
+import teamImage from '../assets/images/Team-image-alhadath.png';
 
 const Home: React.FC = () => {
   const { t } = useLanguage();
