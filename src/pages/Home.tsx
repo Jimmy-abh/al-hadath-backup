@@ -306,36 +306,14 @@ const AboutSection: React.FC = () => {
             initial={{ x: 50, opacity: 0 }}
             animate={inView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4 sm:gap-6"
+            className="flex justify-center"
           >
-            <div className="space-y-4 sm:space-y-6">
-              <img
-                src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
-                alt="Event planning"
-                className="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-                loading="lazy"
-              />
-              <img
-                src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
-                alt="Corporate event"
-                className="w-full h-32 sm:h-36 lg:h-40 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-                loading="lazy"
-              />
-            </div>
-            <div className="space-y-4 sm:space-y-6 pt-8 sm:pt-12">
-              <img
-                src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
-                alt="Wedding decoration"
-                className="w-full h-32 sm:h-36 lg:h-40 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-                loading="lazy"
-              />
-              <img
-                src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
-                alt="Concert"
-                className="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-                loading="lazy"
-              />
-            </div>
+            <img
+              src="/images/Team-image-alhadath.png"
+              alt="Al-Hadath Events Team"
+              className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              loading="lazy"
+            />
           </motion.div>
         </div>
       </div>
