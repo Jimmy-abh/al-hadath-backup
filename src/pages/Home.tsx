@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   
   const heroImages = [
     '/images/headway-F2KRf_QfCqw-unsplash.jpg',
-    'https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
+    'https://images.pexels.com/photos/19458717/pexels-photo-19458717.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
     '/images/lavi-perchik-FCPV_n0lOxc-unsplash.jpg',
   ];
 
