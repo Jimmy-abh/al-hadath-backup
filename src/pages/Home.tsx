@@ -6,16 +6,6 @@ import { ChevronLeft, ChevronRight, Star, MessageCircle, ArrowRight } from 'luci
 import { useLanguage } from '../contexts/LanguageContext';
 import OptimizedImage from '../components/OptimizedImage';
 import { getOptimizedImageUrl } from '../utils/imageOptimization';
-import logo1 from '../assets/images/logo1.png';
-import logo2 from '../assets/images/logo2.png';
-import logo3 from '../assets/images/logo3.png';
-import logo4 from '../assets/images/logo4.png';
-import logo5 from '../assets/images/logo5.png';
-import logo6 from '../assets/images/logo6.png';
-import logo7 from '../assets/images/logo7.png';
-import logo8 from '../assets/images/logo8.png';
-import logo9 from '../assets/images/logo9.png';
-import logo10 from '../assets/images/logo10.png';
 
 const Home: React.FC = () => {
   const { t } = useLanguage();
@@ -470,16 +460,16 @@ const PartnersSection: React.FC = () => {
 
   // Partner logos - filter out any undefined/missing logos
   const allPartners = [
-    { name: 'Logo 1', logo: logo1 },
-    { name: 'Logo 2', logo: logo2 },
-    { name: 'Logo 3', logo: logo3 },
-    { name: 'Logo 4', logo: logo4 },
-    { name: 'Logo 5', logo: logo5 },
-    { name: 'Logo 6', logo: logo6 },
-    { name: 'Logo 7', logo: logo7 },
-    { name: 'Logo 8', logo: logo8 },
-    { name: 'Logo 9', logo: logo9 },
-    { name: 'Logo 10', logo: logo10 }
+    { name: 'Logo 1', logo: '/images/logo1.png' },
+    { name: 'Logo 2', logo: '/images/logo2.png' },
+    { name: 'Logo 3', logo: '/images/logo3.png' },
+    { name: 'Logo 4', logo: '/images/logo4.png' },
+    { name: 'Logo 5', logo: '/images/logo5.png' },
+    { name: 'Logo 6', logo: '/images/logo6.png' },
+    { name: 'Logo 7', logo: '/images/logo7.png' },
+    { name: 'Logo 8', logo: '/images/logo8.png' },
+    { name: 'Logo 9', logo: '/images/logo9.png' },
+    { name: 'Logo 10', logo: '/images/logo10.png' }
   ];
   
   // Filter out any undefined logos to prevent empty slots
