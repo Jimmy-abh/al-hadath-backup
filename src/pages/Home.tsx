@@ -460,17 +460,16 @@ const PartnersSection: React.FC = () => {
 
   // Partner logos from uploaded files
   const partners = [
-    { name: 'Al-Hikma', logo: '/images/الحكمة-300x184.png' },
-    { name: 'Point', logo: '/images/بوينت-300x184.png' },
-    { name: 'AEEDC Dubai', logo: '/images/AEEDC DUBAI-8.png' },
-    { name: 'Al-Hadath Media', logo: '/images/الحدث-ميديا-300x184.png' },
-    { name: 'Blay Logo', logo: '/images/blay logo png-8.png' },
-    { name: 'Photo Point', logo: '/images/فوتو-نكت-1-300x184.png' },
-    { name: 'IDEX Egypt', logo: '/images/idex-eg-300x184.png' },
-    { name: 'IDEX Istanbul', logo: '/images/idex-ist-300x184.png' },
+    { name: 'الحكمة', logo: '/images/الحكمة-300x184.png' },
+    { name: 'بوينت', logo: '/images/بوينت-300x184.png' },
+    { name: 'AEEDC Dubai', logo: '/images/AEEDC%20DUBAI-8.png' },
+    { name: 'الحدث ميديا', logo: '/images/الحدث-ميديا-300x184.png' },
+    { name: 'Blay', logo: '/images/blay%20logo%20png-8.png' },
+    { name: 'فوتو نكت', logo: '/images/فوتو-نكت-1-300x184.png' },
+    { name: 'IDEX EG', logo: '/images/idex-eg-300x184.png' },
+    { name: 'IDEX IST', logo: '/images/idex-ist-300x184.png' },
     { name: 'IDEX', logo: '/images/idex-300x184.png' },
-    { name: 'Partner Logo', logo: '/images/Untitled-1-300x184.png' },
-  ];
+    { name: 'Untitled 1', logo: '/images/Untitled-1-300x184.png' },
   
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
