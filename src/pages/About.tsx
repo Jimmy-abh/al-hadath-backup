@@ -108,8 +108,8 @@ const MissionSection: React.FC = () => {
             className="flex justify-center"
           >
             <img
-              src="https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Team-image-alhadath.png"
-              alt="Al-Hadath Events Team"
+              src="/images/pexels-fauxels-3184311.jpg"
+              alt="Test image"
               className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
               loading="lazy"
             />
