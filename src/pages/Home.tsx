@@ -469,7 +469,7 @@ const PartnersSection: React.FC = () => {
     { name: 'IDEX EG', logo: '/images/idex-eg-300x184.png' },
     { name: 'IDEX IST', logo: '/images/idex-ist-300x184.png' },
     { name: 'IDEX', logo: '/images/idex-300x184.png' },
-    { name: 'Untitled 1', logo: '/images/Untitled-1-300x184.png' },
+    { name: 'Untitled 1', logo: '/images/Untitled-1-300x184.png' }
   ];
   
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
