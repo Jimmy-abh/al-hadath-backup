@@ -460,17 +460,17 @@ const PartnersSection: React.FC = () => {
 
   // Partner logos from uploaded files
   const partners = [
-    { name: 'Partner 1', logo: '/images/logos/logo1.png' },
-    { name: 'Partner 2', logo: '/images/logos/logo2.png' },
-    { name: 'Partner 3', logo: '/images/logos/logo3.png' },
-    { name: 'Partner 4', logo: '/images/logos/logo4.png' },
-    { name: 'Partner 5', logo: '/images/logos/logo5.png' },
-    { name: 'Partner 6', logo: '/images/logos/logo6.png' },
-    { name: 'Partner 7', logo: '/images/logos/logo7.png' },
-    { name: 'Partner 8', logo: '/images/logos/logo8.png' },
-    { name: 'Partner 9', logo: '/images/logos/logo9.png' },
-    { name: 'Partner 10', logo: '/images/logos/logo10.png' },
-    { name: 'Partner 11', logo: '/images/logos/logo11.png' },
+    { name: 'Hikma', logo: '/images/logos/hikma-300x184.png' },
+    { name: 'AEEDC Dubai', logo: '/images/logos/AEEDC DUBAI-8.png' },
+    { name: 'Babel Logo', logo: '/images/logos/Babel-Logo.png' },
+    { name: 'Cosmo Care', logo: '/images/logos/Cosmo Care.png' },
+    { name: 'Derma Vision', logo: '/images/logos/Derma Vision.png' },
+    { name: 'Dental House', logo: '/images/logos/Dental House.png' },
+    { name: 'Iraq Med', logo: '/images/logos/Iraq Med.png' },
+    { name: 'Medical Union', logo: '/images/logos/Medical Union.png' },
+    { name: 'Modern Clinic', logo: '/images/logos/Modern Clinic.png' },
+    { name: 'Teeba Pharma', logo: '/images/logos/Teeba-Pharma.png' },
+    { name: 'United Group', logo: '/images/logos/United Group.png' },
   ];
   
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
