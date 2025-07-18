@@ -494,7 +494,7 @@ const PartnersSection: React.FC = () => {
   // Duplicate partners array for seamless infinite scroll
   const duplicatedPartners = [...partners, ...partners];
   return (
-    <section ref={ref} className="py-12 sm:py-16 lg:py-20 bg-teal-700 border-t border-teal-600/30">
+    <section ref={ref} className="py-12 sm:py-16 lg:py-20 bg-dark-200">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
@@ -517,21 +517,20 @@ const PartnersSection: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative overflow-hidden"
+          className="relative"
         >
-          {/* Seamless Scrolling Logo Banner - Edge to Edge */}
-          <div className="py-8 sm:py-12 overflow-hidden">
-            <div className="flex animate-scroll items-center">
+          {/* Teal Background Strip for Logo Carousel */}
+          <div className="bg-teal-700 rounded-xl overflow-hidden py-6 sm:py-8">
+            <div className="flex animate-scroll items-center h-20 sm:h-24 lg:h-28">
               {duplicatedPartners.map((partner, index) => (
                 <div
                   key={`${partner.name}-${index}`}
-                  className="flex-shrink-0 flex items-center justify-center mx-6 sm:mx-8 lg:mx-12 hover:scale-105 transition-all duration-300 ease-in-out"
+                  className="flex-shrink-0 flex items-center justify-center mx-4 sm:mx-6 lg:mx-8 hover:scale-105 transition-all duration-300 ease-in-out"
                 >
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="max-h-24 sm:max-h-28 lg:max-h-32 w-auto object-contain filter drop-shadow-lg brightness-110 contrast-110"
-                    loading="eager"
+                    className="h-12 sm:h-16 lg:h-20 w-auto object-contain filter drop-shadow-lg"
                     onError={(e) => {
                       // Hide broken images gracefully
                       const target = e.target as HTMLImageElement;
