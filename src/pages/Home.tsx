@@ -460,16 +460,16 @@ const PartnersSection: React.FC = () => {
 
   // Partner logos from uploaded files
   const partners = [
-    { name: 'Logo 1', logo: '/images/logo1.png' },
-    { name: 'Logo 2', logo: '/images/logo2.png' },
-    { name: 'Logo 3', logo: '/images/logo3.png' },
-    { name: 'Logo 4', logo: '/images/logo4.png' },
-    { name: 'Logo 5', logo: '/images/logo5.png' },
-    { name: 'Logo 6', logo: '/images/logo6.png' },
-    { name: 'Logo 7', logo: '/images/logo7.png' },
-    { name: 'Logo 8', logo: '/images/logo8.png' },
-    { name: 'Logo 9', logo: '/images/logo9.png' },
-    { name: 'Logo 10', logo: '/images/logo10.png' }
+    { name: 'Logo 1', logo: logo1 },
+    { name: 'Logo 2', logo: logo2 },
+    { name: 'Logo 3', logo: logo3 },
+    { name: 'Logo 4', logo: logo4 },
+    { name: 'Logo 5', logo: logo5 },
+    { name: 'Logo 6', logo: logo6 },
+    { name: 'Logo 7', logo: logo7 },
+    { name: 'Logo 8', logo: logo8 },
+    { name: 'Logo 9', logo: logo9 },
+    { name: 'Logo 10', logo: logo10 }
   ];
   
   // 🕵️ DIAGNOSTIC: Log partner URLs and check if they resolve
