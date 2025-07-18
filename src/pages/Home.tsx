@@ -660,7 +660,7 @@ const PartnersSection: React.FC = () => {
                         src={partner.logo}
                         alt={partner.name}
                         className="w-full h-auto max-h-20 object-contain opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300"
-                        loading="lazy"
+                        loading="eager"
                         onError={(e) => {
                           // Fallback for broken images
                           const target = e.target as HTMLImageElement;
