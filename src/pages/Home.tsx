@@ -459,7 +459,7 @@ const PartnersSection: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   // Partner logos - filter out any undefined/missing logos
-  const allPartners = [
+  const partners = [
     { name: 'Logo 1', logo: '/images/logo1.png' },
     { name: 'Logo 2', logo: '/images/logo2.png' },
     { name: 'Logo 3', logo: '/images/logo3.png' },
@@ -469,13 +469,9 @@ const PartnersSection: React.FC = () => {
     { name: 'Logo 7', logo: '/images/logo7.png' },
     { name: 'Logo 8', logo: '/images/logo8.png' },
     { name: 'Logo 9', logo: '/images/logo9.png' },
-    { name: 'Logo 10', logo: '/images/logo10.png' }
+    { name: 'Logo 10', logo: '/images/logo10.png' },
   ];
   
-  // Filter out any undefined logos to prevent empty slots
-  const partners = allPartners.filter(partner => partner.logo);
-  
-
   // Don't render if no partners available
   if (partners.length === 0) {
     return null;
@@ -520,7 +516,8 @@ const PartnersSection: React.FC = () => {
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="h-12 sm:h-16 lg:h-20 w-auto object-contain filter drop-shadow-lg"
+                    style={{ border: '2px solid red' }}
+                    className="w-full h-auto object-contain filter drop-shadow-lg"
                     onError={(e) => {
                       // Hide broken images gracefully
                       const target = e.target as HTMLImageElement;
