@@ -245,6 +245,7 @@ const Contact: React.FC = () => {
         handleCountryCodeChange={handleCountryCodeChange}
         setShowCountryDropdown={setShowCountryDropdown}
         getTodayDate={getTodayDate}
+        setFormData={setFormData}
       />
 
       {/* Map Section */}
@@ -279,6 +280,7 @@ const ContactSection: React.FC<{
   handleCountryCodeChange: (code: string) => void;
   setShowCountryDropdown: (show: boolean) => void;
   getTodayDate: () => string;
+  setFormData: React.Dispatch<React.SetStateAction<any>>;
 }> = ({ 
   formData, 
   handleChange, 
@@ -292,7 +294,8 @@ const ContactSection: React.FC<{
   handlePhoneChange,
   handleCountryCodeChange,
   setShowCountryDropdown,
-  getTodayDate
+  getTodayDate,
+  setFormData
 }) => {
   const { language } = useLanguage();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
