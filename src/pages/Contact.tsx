@@ -5,6 +5,8 @@ import { MapPin, Phone, Mail, MessageCircle, Instagram, Send, Clock, Facebook, L
 import { useLanguage } from '../contexts/LanguageContext';
 import { supabase, type ContactFormData, isValidEmail, sanitizeInput } from '../lib/supabase';
 import { parsePhoneNumber, isValidPhoneNumber, getCountries, getCountryCallingCode } from 'libphonenumber-js';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Contact: React.FC = () => {
   const { language } = useLanguage();
@@ -13,7 +15,7 @@ const Contact: React.FC = () => {
     email: '',
     phone: '',
     eventType: '',
-    eventDate: '',
+    eventDate: new Date(),
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,19 +25,8 @@ const Contact: React.FC = () => {
   const [selectedCountryCode, setSelectedCountryCode] = useState('+964');
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
 
-  // Get today's date in YYYY-MM-DD format
-  const getTodayDate = () => {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
-  };
-
-  // Initialize form with today's date
-  useEffect(() => {
-    setFormData(prev => ({
-      ...prev,
-      eventDate: getTodayDate()
-    }));
-  }, []);
+  // Get today's date as Date object
+  const getTodayDate = () => new Date();
 
   // Country codes for phone validation
   const countryCodes = [
@@ -95,8 +86,8 @@ const Contact: React.FC = () => {
     }
     
     // Validate event date (no past dates)
-    if (formData.eventDate) {
-      const selectedDate = new Date(formData.eventDate);
+    if (formData.eventDate instanceof Date) {
+      const selectedDate = formData.eventDate;
       const today = new Date();
       today.setHours(0, 0, 0, 0); // Reset time to start of day
       
@@ -125,7 +116,7 @@ const Contact: React.FC = () => {
         email: sanitizeInput(formData.email),
         phone: formData.phone.trim() ? sanitizeInput(selectedCountryCode + formData.phone.replace(/^\+?[\d\s-]+/, '').replace(/\D/g, '')) : null,
         event_type: formData.eventType,
-        preferred_date: formData.eventDate || null,
+        preferred_date: formData.eventDate instanceof Date ? formData.eventDate.toISOString().split('T')[0] : null,
         message: sanitizeInput(formData.message),
       };
       
@@ -144,7 +135,7 @@ const Contact: React.FC = () => {
         email: '',
         phone: '',
         eventType: '',
-        eventDate: getTodayDate(),
+        eventDate: new Date(),
         message: '',
       });
       setErrors({});
@@ -596,7 +587,7 @@ const ContactSection: React.FC<{
                     minDate={new Date()}
                     dateFormat="yyyy-MM-dd"
                     className={`w-full px-4 py-3 bg-dark-50 border rounded-lg text-white focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base cursor-pointer ${
-                    errors.eventDate ? 'form-error border-red-500' : 'border-teal-500/20'
+                      errors.eventDate ? 'form-error border-red-500' : 'border-teal-500/20'
                     }`}
                     placeholderText={language === 'en' ? 'Select event date' : 'اختر تاريخ الفعالية'}
                     popperClassName="date-picker-popper"
