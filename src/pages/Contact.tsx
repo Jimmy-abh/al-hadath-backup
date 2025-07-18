@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { MapPin, Phone, Mail, MessageCircle, Instagram, Send, Clock, Facebook, Linkedin, CheckCircle, AlertCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, MessageCircle, Instagram, Send, Clock, Facebook, Linkedin, CheckCircle, AlertCircle, X, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { supabase, type ContactFormData, isValidEmail, sanitizeInput } from '../lib/supabase';
+import { parsePhoneNumber, isValidPhoneNumber, getCountries, getCountryCallingCode } from 'libphonenumber-js';
 
 const Contact: React.FC = () => {
   const { language } = useLanguage();
@@ -18,6 +19,39 @@ const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [selectedCountryCode, setSelectedCountryCode] = useState('+964');
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+
+  // Get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
+  // Initialize form with today's date
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      eventDate: getTodayDate()
+    }));
+  }, []);
+
+  // Country codes for phone validation
+  const countryCodes = [
+    { code: '+964', country: 'IQ', name: language === 'en' ? 'Iraq' : 'العراق' },
+    { code: '+1', country: 'US', name: language === 'en' ? 'United States' : 'الولايات المتحدة' },
+    { code: '+44', country: 'GB', name: language === 'en' ? 'United Kingdom' : 'المملكة المتحدة' },
+    { code: '+971', country: 'AE', name: language === 'en' ? 'UAE' : 'الإمارات' },
+    { code: '+966', country: 'SA', name: language === 'en' ? 'Saudi Arabia' : 'السعودية' },
+    { code: '+965', country: 'KW', name: language === 'en' ? 'Kuwait' : 'الكويت' },
+    { code: '+973', country: 'BH', name: language === 'en' ? 'Bahrain' : 'البحرين' },
+    { code: '+974', country: 'QA', name: language === 'en' ? 'Qatar' : 'قطر' },
+    { code: '+968', country: 'OM', name: language === 'en' ? 'Oman' : 'عمان' },
+    { code: '+962', country: 'JO', name: language === 'en' ? 'Jordan' : 'الأردن' },
+    { code: '+961', country: 'LB', name: language === 'en' ? 'Lebanon' : 'لبنان' },
+    { code: '+963', country: 'SY', name: language === 'en' ? 'Syria' : 'سوريا' },
+  ];
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -47,6 +81,30 @@ const Contact: React.FC = () => {
       newErrors.message = language === 'en' ? 'Message must be at least 10 characters' : 'يجب أن تكون الرسالة على الأقل 10 أحرف';
     }
     
+    // Validate phone number if provided
+    if (formData.phone.trim()) {
+      const fullPhoneNumber = selectedCountryCode + formData.phone.replace(/^\+?[\d\s-]+/, '').replace(/\D/g, '');
+      try {
+        const phoneNumber = parsePhoneNumber(fullPhoneNumber);
+        if (!phoneNumber || !phoneNumber.isValid()) {
+          newErrors.phone = language === 'en' ? 'Invalid phone number format' : 'تنسيق رقم الهاتف غير صحيح';
+        }
+      } catch (error) {
+        newErrors.phone = language === 'en' ? 'Invalid phone number format' : 'تنسيق رقم الهاتف غير صحيح';
+      }
+    }
+    
+    // Validate event date (no past dates)
+    if (formData.eventDate) {
+      const selectedDate = new Date(formData.eventDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Reset time to start of day
+      
+      if (selectedDate < today) {
+        newErrors.eventDate = language === 'en' ? 'Event date cannot be in the past' : 'تاريخ الفعالية لا يمكن أن يكون في الماضي';
+      }
+    }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -65,7 +123,7 @@ const Contact: React.FC = () => {
       const contactData: ContactFormData = {
         full_name: sanitizeInput(formData.name),
         email: sanitizeInput(formData.email),
-        phone: formData.phone.trim() ? sanitizeInput(formData.phone) : null,
+        phone: formData.phone.trim() ? sanitizeInput(selectedCountryCode + formData.phone.replace(/^\+?[\d\s-]+/, '').replace(/\D/g, '')) : null,
         event_type: formData.eventType,
         preferred_date: formData.eventDate || null,
         message: sanitizeInput(formData.message),
@@ -80,20 +138,16 @@ const Contact: React.FC = () => {
       }
       
       setSubmitStatus('success');
+      setShowSuccessModal(true);
       setFormData({
         name: '',
         email: '',
         phone: '',
         eventType: '',
-        eventDate: '',
+        eventDate: getTodayDate(),
         message: '',
       });
       setErrors({});
-      
-      // Auto-hide success message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 5000);
       
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -120,6 +174,35 @@ const Contact: React.FC = () => {
       setErrors({
         ...errors,
         [name]: '',
+      });
+    }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+    setFormData({
+      ...formData,
+      phone: value,
+    });
+    
+    // Clear phone error when user starts typing
+    if (errors.phone) {
+      setErrors({
+        ...errors,
+        phone: '',
+      });
+    }
+  };
+
+  const handleCountryCodeChange = (code: string) => {
+    setSelectedCountryCode(code);
+    setShowCountryDropdown(false);
+    
+    // Clear phone error when country changes
+    if (errors.phone) {
+      setErrors({
+        ...errors,
+        phone: '',
       });
     }
   };
@@ -164,6 +247,13 @@ const Contact: React.FC = () => {
        isSubmitting={isSubmitting}
        submitStatus={submitStatus}
        errors={errors}
+        selectedCountryCode={selectedCountryCode}
+        showCountryDropdown={showCountryDropdown}
+        countryCodes={countryCodes}
+        handlePhoneChange={handlePhoneChange}
+        handleCountryCodeChange={handleCountryCodeChange}
+        setShowCountryDropdown={setShowCountryDropdown}
+        getTodayDate={getTodayDate}
       />
 
       {/* Map Section */}
@@ -171,6 +261,15 @@ const Contact: React.FC = () => {
 
       {/* Office Hours */}
       <OfficeHoursSection />
+
+      {/* Success Modal */}
+      <SuccessModal 
+        isOpen={showSuccessModal} 
+        onClose={() => {
+          setShowSuccessModal(false);
+          setSubmitStatus('idle');
+        }} 
+      />
     </div>
   );
 };
@@ -182,7 +281,28 @@ const ContactSection: React.FC<{
   isSubmitting: boolean;
   submitStatus: 'idle' | 'success' | 'error';
   errors: Record<string, string>;
-}> = ({ formData, handleChange, handleSubmit, isSubmitting, submitStatus, errors }) => {
+  selectedCountryCode: string;
+  showCountryDropdown: boolean;
+  countryCodes: any[];
+  handlePhoneChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCountryCodeChange: (code: string) => void;
+  setShowCountryDropdown: (show: boolean) => void;
+  getTodayDate: () => string;
+}> = ({ 
+  formData, 
+  handleChange, 
+  handleSubmit, 
+  isSubmitting, 
+  submitStatus, 
+  errors,
+  selectedCountryCode,
+  showCountryDropdown,
+  countryCodes,
+  handlePhoneChange,
+  handleCountryCodeChange,
+  setShowCountryDropdown,
+  getTodayDate
+}) => {
   const { language } = useLanguage();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -313,22 +433,6 @@ const ContactSection: React.FC<{
             className="lg:col-span-2"
           >
             {/* Success/Error Messages */}
-            {submitStatus === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-green-500/20 border border-green-500/40 rounded-lg flex items-center space-x-3 rtl:space-x-reverse"
-              >
-                <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                <p className="text-green-100 font-inter">
-                  {language === 'en' 
-                    ? 'Your message has been sent successfully! We\'ll get back to you soon.'
-                    : 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.'
-                  }
-                </p>
-              </motion.div>
-            )}
-            
             {submitStatus === 'error' && (
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -395,20 +499,56 @@ const ContactSection: React.FC<{
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-beige-100 mb-2">
+                  <label htmlFor="phone" className="block text-sm font-medium text-beige-100 mb-2 relative">
                     {language === 'en' ? 'Phone Number' : 'رقم الهاتف'}
                   </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-dark-50 border border-teal-500/20 rounded-lg text-white placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base"
-                    placeholder="+964 XXX XXX XXXX"
-                    dir="ltr"
-                    maxLength={20}
-                  />
+                  <div className="relative">
+                    {/* Country Code Dropdown */}
+                    <div className="absolute left-0 top-0 bottom-0 flex items-center">
+                      <button
+                        type="button"
+                        onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                        className="h-full px-3 bg-dark-300 border-r border-teal-500/20 rounded-l-lg text-white hover:bg-dark-200 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
+                      >
+                        <span className="text-sm font-mono">{selectedCountryCode}</span>
+                        <ChevronDown className="w-4 h-4" />
+                      </button>
+                      
+                      {/* Dropdown Menu */}
+                      {showCountryDropdown && (
+                        <div className="absolute top-full left-0 mt-1 bg-dark-50 border border-teal-500/20 rounded-lg shadow-lg z-10 max-h-48 overflow-y-auto min-w-[200px]">
+                          {countryCodes.map((country) => (
+                            <button
+                              key={country.code}
+                              type="button"
+                              onClick={() => handleCountryCodeChange(country.code)}
+                              className="w-full px-3 py-2 text-left text-white hover:bg-teal-500/20 transition-colors flex items-center justify-between text-sm"
+                            >
+                              <span>{country.name}</span>
+                              <span className="font-mono text-beige-300">{country.code}</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handlePhoneChange}
+                      className={`w-full pl-20 pr-4 py-3 bg-dark-50 border rounded-lg text-white placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
+                        errors.phone ? 'form-error border-red-500' : 'border-teal-500/20'
+                      }`}
+                      placeholder="XXX XXX XXXX"
+                      dir="ltr"
+                      maxLength={15}
+                    />
+                  </div>
+                  {errors.phone && (
+                    <p className="mt-1 text-sm text-red-400">{errors.phone}</p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="eventType" className="block text-sm font-medium text-beige-100 mb-2">
@@ -447,8 +587,14 @@ const ContactSection: React.FC<{
                   name="eventDate"
                   value={formData.eventDate}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-dark-50 border border-teal-500/20 rounded-lg text-white focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base"
+                  min={getTodayDate()}
+                  className={`w-full px-4 py-3 bg-dark-50 border rounded-lg text-white focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
+                    errors.eventDate ? 'form-error border-red-500' : 'border-teal-500/20'
+                  }`}
                 />
+                {errors.eventDate && (
+                  <p className="mt-1 text-sm text-red-400">{errors.eventDate}</p>
+                )}
               </div>
 
               <div>
@@ -500,6 +646,56 @@ const ContactSection: React.FC<{
         </div>
       </div>
     </section>
+  );
+};
+
+const SuccessModal: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+}> = ({ isOpen, onClose }) => {
+  const { language } = useLanguage();
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="relative max-w-md w-full bg-dark-100 rounded-xl border border-teal-500/20 shadow-2xl overflow-hidden"
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 w-8 h-8 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          aria-label={language === 'en' ? 'Close modal' : 'إغلاق النافذة'}
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Modal Content */}
+        <div className="p-8 text-center">
+          {/* Success Icon */}
+          <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="w-8 h-8 text-white" />
+          </div>
+
+          {/* Success Message */}
+          <h3 className="text-xl sm:text-2xl font-playfair font-bold text-white mb-4">
+            {language === 'en' ? 'Thank You!' : 'شكرًا لك!'}
+          </h3>
+          
+          <p className="text-beige-100 font-inter leading-relaxed text-sm sm:text-base">
+            {language === 'en' 
+              ? 'Your message has been sent. We\'ll get back to you soon.'
+              : 'تم إرسال رسالتك وسنقوم بالرد عليك قريبًا.'
+            }
+          </p>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
