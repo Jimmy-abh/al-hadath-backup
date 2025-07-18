@@ -458,7 +458,7 @@ const PartnersSection: React.FC = () => {
   const { language } = useLanguage();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  // Partner logos - filter out any undefined/missing logos
+  // Partner logos - exactly 10 logos for diagnostic testing
   const partners = [
     { name: 'Logo 1', logo: '/images/logo1.png' },
     { name: 'Logo 2', logo: '/images/logo2.png' },
@@ -472,13 +472,15 @@ const PartnersSection: React.FC = () => {
     { name: 'Logo 10', logo: '/images/logo10.png' },
   ];
   
-  // Don't render if no partners available
-  if (partners.length === 0) {
-    return null;
-  }
+  // Debug: Log partners array to console
+  console.log('PartnersSection - Partners array:', partners);
+  console.log('PartnersSection - Partners length:', partners.length);
+  console.log('PartnersSection - inView:', inView);
 
   // Duplicate partners array for seamless infinite scroll
   const duplicatedPartners = [...partners, ...partners];
+  console.log('PartnersSection - Duplicated partners length:', duplicatedPartners.length);
+  
   return (
     <section ref={ref} className="py-12 sm:py-16 lg:py-20 bg-dark-200">
       <div className="container mx-auto px-4 sm:px-6">
@@ -503,30 +505,63 @@ const PartnersSection: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative"
+          className="relative w-full"
         >
-          {/* Teal Background Strip for Logo Carousel */}
-          <div className="bg-teal-700 rounded-xl overflow-hidden py-6 sm:py-8">
-            <div className="flex animate-scroll items-center h-20 sm:h-24 lg:h-28">
+          {/* Debug: Teal Background Strip for Logo Carousel with explicit dimensions */}
+          <div 
+            className="bg-teal-700 rounded-xl overflow-hidden py-6 sm:py-8 w-full"
+            style={{ minHeight: '120px' }}
+          >
+            {/* Debug: Carousel track with explicit width and flex layout */}
+            <div 
+              className="flex animate-scroll items-center h-20 sm:h-24 lg:h-28"
+              style={{ 
+                width: `${duplicatedPartners.length * 200}px`,
+                minWidth: '100%'
+              }}
+            >
+              {/* Debug: Log each partner being rendered */}
               {duplicatedPartners.map((partner, index) => (
                 <div
                   key={`${partner.name}-${index}`}
                   className="flex-shrink-0 flex items-center justify-center mx-4 sm:mx-6 lg:mx-8 hover:scale-105 transition-all duration-300 ease-in-out"
+                  style={{ 
+                    width: '160px',
+                    height: '80px',
+                    border: '1px solid yellow' // Additional container debug
+                  }}
+                  onLoad={() => console.log(`Container ${index} rendered for ${partner.name}`)}
                 >
+                  {/* Debug: Enhanced img with multiple diagnostic styles */}
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    style={{ border: '2px solid red' }}
-                    className="w-full h-auto object-contain filter drop-shadow-lg"
+                    style={{ 
+                      border: '2px solid red',
+                      backgroundColor: 'rgba(255,255,255,0.1)',
+                      minWidth: '60px',
+                      minHeight: '40px'
+                    }}
+                    className="max-w-full max-h-full object-contain filter drop-shadow-lg"
                     onError={(e) => {
-                      // Hide broken images gracefully
+                      // Debug: Log errors but don't hide images
                       const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
+                      console.error(`Failed to load image: ${partner.logo}`);
+                      target.style.backgroundColor = 'rgba(255,0,0,0.3)';
+                      target.alt = `MISSING: ${partner.name}`;
+                    }}
+                    onLoad={(e) => {
+                      console.log(`Successfully loaded: ${partner.logo}`);
                     }}
                   />
                 </div>
               ))}
             </div>
+          </div>
+          
+          {/* Debug: Show partners count */}
+          <div className="text-center mt-4 text-white text-sm">
+            Debug: {partners.length} partners, {duplicatedPartners.length} total items
           </div>
         </motion.div>
       </div>
