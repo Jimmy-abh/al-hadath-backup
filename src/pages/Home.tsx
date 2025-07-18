@@ -460,17 +460,16 @@ const PartnersSection: React.FC = () => {
 
   // Partner logos from uploaded files
   const partners = [
-    { name: 'Hikma', logo: '/images/logos/hikma-300x184.png' },
-    { name: 'AEEDC Dubai', logo: '/images/logos/AEEDC DUBAI-8.png' },
-    { name: 'Babel Logo', logo: '/images/logos/Babel-Logo.png' },
-    { name: 'Cosmo Care', logo: '/images/logos/Cosmo Care.png' },
-    { name: 'Derma Vision', logo: '/images/logos/Derma Vision.png' },
-    { name: 'Dental House', logo: '/images/logos/Dental House.png' },
-    { name: 'Iraq Med', logo: '/images/logos/Iraq Med.png' },
-    { name: 'Medical Union', logo: '/images/logos/Medical Union.png' },
-    { name: 'Modern Clinic', logo: '/images/logos/Modern Clinic.png' },
-    { name: 'Teeba Pharma', logo: '/images/logos/Teeba-Pharma.png' },
-    { name: 'United Group', logo: '/images/logos/United Group.png' },
+    { name: 'Al-Hikma', logo: '/images/الحكمة-300x184.png' },
+    { name: 'Point', logo: '/images/بوينت-300x184.png' },
+    { name: 'AEEDC Dubai', logo: '/images/AEEDC DUBAI-8.png' },
+    { name: 'Al-Hadath Media', logo: '/images/الحدث-ميديا-300x184.png' },
+    { name: 'Blay Logo', logo: '/images/blay logo png-8.png' },
+    { name: 'Photo Point', logo: '/images/فوتو-نكت-1-300x184.png' },
+    { name: 'IDEX Egypt', logo: '/images/idex-eg-300x184.png' },
+    { name: 'IDEX Istanbul', logo: '/images/idex-ist-300x184.png' },
+    { name: 'IDEX', logo: '/images/idex-300x184.png' },
+    { name: 'Partner Logo', logo: '/images/Untitled-1-300x184.png' },
   ];
   
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
@@ -624,10 +623,11 @@ const PartnersSection: React.FC = () => {
                   style={{ width: `${100 / partners.length}%` }}
                 >
                   <div className="relative w-full h-16 sm:h-20 lg:h-24 bg-white/5 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 shadow-lg hover:shadow-xl p-3 sm:p-4">
+                  <div className="bg-white/10 rounded-xl backdrop-blur-sm p-3 shadow">
                     <img
                       src={partner.logo}
                       alt={partner.name}
-                      className="max-w-full max-h-full object-contain opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 filter brightness-0 invert"
+                      className="w-full h-auto max-h-20 object-contain opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300"
                       loading="lazy"
                       onError={(e) => {
                         // Fallback for broken images
@@ -635,6 +635,7 @@ const PartnersSection: React.FC = () => {
                         target.style.display = 'none';
                       }}
                     />
+                  </div>
                   </div>
                 </div>
               ))}
