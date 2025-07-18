@@ -627,7 +627,7 @@ const PartnersSection: React.FC = () => {
                     <img
                       src={partner.logo}
                       alt={partner.name}
-                      className="max-w-full max-h-full object-contain opacity-75 group-hover:opacity-100 transition-all duration-300 filter brightness-0 invert group-hover:brightness-110"
+                      className="max-w-full max-h-full object-contain opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 filter brightness-0 invert"
                       loading="lazy"
                       onError={(e) => {
                         // Fallback for broken images
