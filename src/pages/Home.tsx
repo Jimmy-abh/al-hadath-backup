@@ -458,39 +458,65 @@ const PartnersSection: React.FC = () => {
   const { language } = useLanguage();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  // Placeholder partner logos - will be replaced with real logos later
+  // Partner logos from uploaded files
   const partners = [
-    { name: 'Iraq Ministry of Education', logo: 'https://via.placeholder.com/140x70/0F766E/FFFFFF?text=MOE' },
-    { name: 'Baghdad Chamber of Commerce', logo: 'https://via.placeholder.com/140x70/0F766E/FFFFFF?text=BCC' },
-    { name: 'University of Baghdad', logo: 'https://via.placeholder.com/140x70/0F766E/FFFFFF?text=UOB' },
-    { name: 'Iraq Private Banks League', logo: 'https://via.placeholder.com/140x70/0F766E/FFFFFF?text=IPBL' },
-    { name: 'Iraqi Medical Association', logo: 'https://via.placeholder.com/140x70/0F766E/FFFFFF?text=IMA' },
-    { name: 'Al-Rasheed Hotel', logo: 'https://via.placeholder.com/140x70/0F766E/FFFFFF?text=ARH' },
-    { name: 'Iraq Tourism Board', logo: 'https://via.placeholder.com/140x70/0F766E/FFFFFF?text=ITB' },
-    { name: 'Baghdad International Airport', logo: 'https://via.placeholder.com/140x70/0F766E/FFFFFF?text=BIA' },
+    { name: 'Partner 1', logo: '/images/logos/logo1.png' },
+    { name: 'Partner 2', logo: '/images/logos/logo2.png' },
+    { name: 'Partner 3', logo: '/images/logos/logo3.png' },
+    { name: 'Partner 4', logo: '/images/logos/logo4.png' },
+    { name: 'Partner 5', logo: '/images/logos/logo5.png' },
+    { name: 'Partner 6', logo: '/images/logos/logo6.png' },
+    { name: 'Partner 7', logo: '/images/logos/logo7.png' },
+    { name: 'Partner 8', logo: '/images/logos/logo8.png' },
+    { name: 'Partner 9', logo: '/images/logos/logo9.png' },
+    { name: 'Partner 10', logo: '/images/logos/logo10.png' },
+    { name: 'Partner 11', logo: '/images/logos/logo11.png' },
   ];
   
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [itemsPerView, setItemsPerView] = useState(3);
   
-  // Auto-advance partners carousel
+  // Update items per view based on screen size
+  useEffect(() => {
+    const updateItemsPerView = () => {
+      if (window.innerWidth >= 1024) {
+        setItemsPerView(3); // lg+: 3 logos
+      } else if (window.innerWidth >= 768) {
+        setItemsPerView(2); // md: 2 logos
+      } else {
+        setItemsPerView(2); // sm: 2 logos (never collapse to 1)
+      }
+    };
+
+    updateItemsPerView();
+    window.addEventListener('resize', updateItemsPerView);
+    return () => window.removeEventListener('resize', updateItemsPerView);
+  }, []);
+
+  // Auto-advance carousel every 3 seconds
   useEffect(() => {
     if (!isAutoPlaying) return;
     
     const interval = setInterval(() => {
-      setCurrentPartnerIndex((prev) => (prev + 1) % partners.length);
+      setCurrentPartnerIndex((prev) => {
+        const maxIndex = Math.max(0, partners.length - itemsPerView);
+        return prev >= maxIndex ? 0 : prev + 1;
+      });
     }, 3000);
     
     return () => clearInterval(interval);
-  }, [isAutoPlaying, partners.length]);
+  }, [isAutoPlaying, partners.length, itemsPerView]);
   
   const nextPartner = () => {
-    setCurrentPartnerIndex((prev) => (prev + 1) % partners.length);
+    const maxIndex = Math.max(0, partners.length - itemsPerView);
+    setCurrentPartnerIndex((prev) => prev >= maxIndex ? 0 : prev + 1);
     setIsAutoPlaying(false);
   };
   
   const prevPartner = () => {
-    setCurrentPartnerIndex((prev) => (prev - 1 + partners.length) % partners.length);
+    const maxIndex = Math.max(0, partners.length - itemsPerView);
+    setCurrentPartnerIndex((prev) => prev <= 0 ? maxIndex : prev - 1);
     setIsAutoPlaying(false);
   };
   
@@ -549,67 +575,92 @@ const PartnersSection: React.FC = () => {
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-          {/* Navigation Arrows - Desktop */}
-          <button
-            onClick={prevPartner}
-            className="hidden md:flex absolute left-0 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full items-center justify-center hover:bg-white/30 transition-colors"
-          >
-            <ChevronLeft className="w-5 h-5 text-white" />
-          </button>
-          <button
-            onClick={nextPartner}
-            className="hidden md:flex absolute right-0 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full items-center justify-center hover:bg-white/30 transition-colors"
-          >
-            <ChevronRight className="w-5 h-5 text-white" />
-          </button>
+          {/* Navigation Arrows */}
+          {partners.length > itemsPerView && (
+            <>
+              <button
+                onClick={prevPartner}
+                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-300 border border-white/20"
+                aria-label={language === 'en' ? 'Previous partners' : 'الشركاء السابقون'}
+              >
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </button>
+              <button
+                onClick={nextPartner}
+                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-300 border border-white/20"
+                aria-label={language === 'en' ? 'Next partners' : 'الشركاء التاليون'}
+              >
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </button>
+            </>
+          )}
           
-          {/* Partners Container with Touch Support */}
+          {/* Logo Carousel Container */}
           <div 
             className="overflow-hidden"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
+            <motion.div 
+              className="flex gap-4 sm:gap-6 lg:gap-8"
+              animate={{ 
+                x: `-${currentPartnerIndex * (100 / itemsPerView)}%` 
+              }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 30,
+                duration: 0.5 
+              }}
               style={{ 
-                transform: `translateX(-${currentPartnerIndex * (100 / Math.min(partners.length, 4))}%)`,
-                width: `${Math.max(partners.length * 25, 100)}%`
+                width: `${(partners.length / itemsPerView) * 100}%`
               }}
             >
               {partners.map((partner, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-1/4 px-2 sm:px-4"
+                  className="flex-shrink-0 group"
+                  style={{ width: `${100 / partners.length}%` }}
                 >
-                  <div className="w-full h-14 sm:h-18 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors group border border-white/10">
+                  <div className="relative w-full h-16 sm:h-20 lg:h-24 bg-white/5 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 shadow-lg hover:shadow-xl p-3 sm:p-4">
                     <img
                       src={partner.logo}
                       alt={partner.name}
-                      className="max-w-full max-h-full object-contain opacity-80 group-hover:opacity-100 transition-all duration-300 filter brightness-90 group-hover:brightness-100"
+                      className="max-w-full max-h-full object-contain opacity-75 group-hover:opacity-100 transition-all duration-300 filter brightness-0 invert group-hover:brightness-110"
                       loading="lazy"
+                      onError={(e) => {
+                        // Fallback for broken images
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
                     />
                   </div>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
           
-          {/* Dots Indicator */}
-          <div className="flex justify-center mt-4 space-x-2">
-            {Array.from({ length: Math.ceil(partners.length / 4) }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentPartnerIndex(index * 4);
-                  setIsAutoPlaying(false);
-                }}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  Math.floor(currentPartnerIndex / 4) === index ? 'bg-teal-400' : 'bg-white/50'
-                }`}
-              />
-            ))}
-          </div>
+          {/* Progress Indicators */}
+          {partners.length > itemsPerView && (
+            <div className="flex justify-center mt-6 space-x-2">
+              {Array.from({ length: Math.max(1, partners.length - itemsPerView + 1) }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setCurrentPartnerIndex(index);
+                    setIsAutoPlaying(false);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    currentPartnerIndex === index 
+                      ? 'bg-teal-400 w-6' 
+                      : 'bg-white/40 hover:bg-white/60'
+                  }`}
+                  aria-label={`${language === 'en' ? 'Go to slide' : 'انتقل إلى الشريحة'} ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
