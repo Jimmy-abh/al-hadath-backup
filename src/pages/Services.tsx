@@ -17,7 +17,7 @@ const Services: React.FC = () => {
       title: language === 'en' ? 'Conferences & Exhibitions' : 'المؤتمرات والمعارض',
       icon: Mic,
       color: 'from-pink-500 to-red-500',
-      image: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
+      image: '/images/pexels-fauxels-3184311.jpg',
       description: language === 'en' 
         ? 'Professional conference management and exhibition planning with cutting-edge technology.'
         : 'إدارة المؤتمرات الاحترافية وتنظيم المعارض بأحدث التقنيات',
