@@ -13,9 +13,17 @@ const Home: React.FC = () => {
   
   const heroImages = [
     '/images/headway-F2KRf_QfCqw-unsplash.jpg',
-    '/images/pexels-khezez-19458717.jpg',
+    'https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
     '/images/lavi-perchik-FCPV_n0lOxc-unsplash.jpg',
   ];
+
+  // Preload hero images for better performance
+  useEffect(() => {
+    heroImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -302,13 +310,13 @@ const AboutSection: React.FC = () => {
           >
             <div className="space-y-4 sm:space-y-6">
               <img
-                src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
+                src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
                 alt="Event planning"
                 className="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                 loading="lazy"
               />
               <img
-                src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+                src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
                 alt="Corporate event"
                 className="w-full h-32 sm:h-36 lg:h-40 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                 loading="lazy"
@@ -316,13 +324,13 @@ const AboutSection: React.FC = () => {
             </div>
             <div className="space-y-4 sm:space-y-6 pt-8 sm:pt-12">
               <img
-                src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+                src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
                 alt="Wedding decoration"
                 className="w-full h-32 sm:h-36 lg:h-40 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                 loading="lazy"
               />
               <img
-                src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
+                src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
                 alt="Concert"
                 className="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                 loading="lazy"
