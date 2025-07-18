@@ -518,8 +518,6 @@ const PartnersSection: React.FC = () => {
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative"
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
         >
           {/* Seamless Scrolling Logo Banner */}
           <div className="bg-teal-500/5 backdrop-blur-sm rounded-xl py-8 sm:py-12 overflow-hidden">
