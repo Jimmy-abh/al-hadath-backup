@@ -102,8 +102,8 @@ const MissionSection: React.FC = () => {
           </motion.div>
 
           <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            animate={inView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }}
+            initial={{ x: 50, opacity: 1 }}
+            animate={inView ? { x: 0, opacity: 1 } : { x: 50, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex justify-center"
           >
