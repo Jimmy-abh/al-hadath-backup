@@ -307,13 +307,11 @@ const AboutSection: React.FC = () => {
             animate={inView ? { x: 0, opacity: 1 } : { x: 50, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex justify-center"
-            style={{ border: '2px solid blue' }}
           >
             <img
               src="/images/Team-image-alhadath.png"
               alt="Al-Hadath Events Team"
               className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-              style={{ border: '2px solid red' }}
             />
           </motion.div>
         </div>
