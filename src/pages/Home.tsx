@@ -6,7 +6,6 @@ import { ChevronLeft, ChevronRight, Star, MessageCircle, ArrowRight } from 'luci
 import { useLanguage } from '../contexts/LanguageContext';
 import OptimizedImage from '../components/OptimizedImage';
 import { getOptimizedImageUrl } from '../utils/imageOptimization';
-import teamImage from '../assets/images/Team-image-alhadath.png';
 
 const Home: React.FC = () => {
   const { t } = useLanguage();
@@ -310,7 +309,7 @@ const AboutSection: React.FC = () => {
             className="flex justify-center"
           >
             <img
-              src={teamImage}
+              src="https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Team-image-alhadath.png"
               alt="Al-Hadath Events Team"
               className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
               loading="lazy"
