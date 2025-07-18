@@ -472,6 +472,26 @@ const PartnersSection: React.FC = () => {
     { name: 'Logo 10', logo: '/images/logo10.png' }
   ];
   
+  // 🕵️ DIAGNOSTIC: Log partner URLs and check if they resolve
+  React.useEffect(() => {
+    console.log('🔍 PARTNERS DIAGNOSTIC - URLs being used:');
+    partners.forEach((partner, index) => {
+      console.log(`Partner ${index + 1}: ${partner.logo}`);
+      
+      // Test if URL is accessible
+      fetch(partner.logo)
+        .then(response => {
+          console.log(`✅ ${partner.logo} - Status: ${response.status} ${response.statusText}`);
+          if (!response.ok) {
+            console.error(`❌ ${partner.logo} failed with status ${response.status}`);
+          }
+        })
+        .catch(error => {
+          console.error(`❌ ${partner.logo} fetch error:`, error);
+        });
+    });
+  }, []);
+
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [itemsPerView, setItemsPerView] = useState(3);
