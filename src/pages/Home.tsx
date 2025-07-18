@@ -460,16 +460,16 @@ const PartnersSection: React.FC = () => {
 
   // Partner logos from uploaded files
   const partners = [
-    { name: 'الحكمة', logo: '/images/الحكمة-300x184.png' },
-    { name: 'بوينت', logo: '/images/بوينت-300x184.png' },
-    { name: 'AEEDC Dubai', logo: '/images/AEEDC%20DUBAI-8.png' },
-    { name: 'الحدث ميديا', logo: '/images/الحدث-ميديا-300x184.png' },
-    { name: 'Blay', logo: '/images/blay%20logo%20png-8.png' },
-    { name: 'فوتو نكت', logo: '/images/فوتو-نكت-1-300x184.png' },
-    { name: 'IDEX EG', logo: '/images/idex-eg-300x184.png' },
-    { name: 'IDEX IST', logo: '/images/idex-ist-300x184.png' },
-    { name: 'IDEX', logo: '/images/idex-300x184.png' },
-    { name: 'Untitled 1', logo: '/images/Untitled-1-300x184.png' }
+    { name: 'Logo 1', logo: '/images/logo1.png' },
+    { name: 'Logo 2', logo: '/images/logo2.png' },
+    { name: 'Logo 3', logo: '/images/logo3.png' },
+    { name: 'Logo 4', logo: '/images/logo4.png' },
+    { name: 'Logo 5', logo: '/images/logo5.png' },
+    { name: 'Logo 6', logo: '/images/logo6.png' },
+    { name: 'Logo 7', logo: '/images/logo7.png' },
+    { name: 'Logo 8', logo: '/images/logo8.png' },
+    { name: 'Logo 9', logo: '/images/logo9.png' },
+    { name: 'Logo 10', logo: '/images/logo10.png' }
   ];
   
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
