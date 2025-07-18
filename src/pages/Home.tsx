@@ -594,6 +594,18 @@ const PartnersSection: React.FC = () => {
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
+          {/* 🕵️ DIAGNOSTIC: Log intersection observer and visibility state */}
+          {React.useEffect(() => {
+            console.log('🔍 PARTNERS SECTION DIAGNOSTIC:', {
+              inView,
+              partnersCount: partners.length,
+              itemsPerView,
+              currentPartnerIndex,
+              isAutoPlaying,
+              sectionVisible: inView ? 'YES' : 'NO'
+            });
+          }, [inView, partners.length, itemsPerView, currentPartnerIndex, isAutoPlaying])}
+          
           {/* Navigation Arrows */}
           {partners.length > itemsPerView && (
             <>
