@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Target, Award, Lightbulb, Shield } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import teamImage from '../../public/images/Team-image-alhadath.png';
 
 const About: React.FC = () => {
   const { t, language } = useLanguage();
@@ -108,7 +109,7 @@ const MissionSection: React.FC = () => {
             className="flex justify-center"
           >
             <img
-              src="/images/Team-image-alhadath.png"
+              src={teamImage}
               alt="Al-Hadath Events Team"
               className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
               loading="lazy"
