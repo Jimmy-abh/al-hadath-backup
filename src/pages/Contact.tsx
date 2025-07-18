@@ -581,17 +581,28 @@ const ContactSection: React.FC<{
                 <label htmlFor="eventDate" className="block text-sm font-medium text-beige-100 mb-2">
                   {language === 'en' ? 'Preferred Event Date' : 'تاريخ الفعالية المفضل'}
                 </label>
-                <input
-                  type="date"
-                  id="eventDate"
-                  name="eventDate"
-                  value={formData.eventDate}
-                  onChange={handleChange}
-                  min={getTodayDate()}
-                  className={`w-full px-4 py-3 bg-dark-50 border rounded-lg text-white focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
+                <div className="relative">
+                  <DatePicker
+                    selected={formData.eventDate}
+                    onChange={(date: Date | null) => {
+                      if (date) {
+                        setFormData({ ...formData, eventDate: date });
+                        // Clear error when date changes
+                        if (errors.eventDate) {
+                          setErrors({ ...errors, eventDate: '' });
+                        }
+                      }
+                    }}
+                    minDate={new Date()}
+                    dateFormat="yyyy-MM-dd"
+                    className={`w-full px-4 py-3 bg-dark-50 border rounded-lg text-white focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base cursor-pointer ${
                     errors.eventDate ? 'form-error border-red-500' : 'border-teal-500/20'
-                  }`}
-                />
+                    }`}
+                    placeholderText={language === 'en' ? 'Select event date' : 'اختر تاريخ الفعالية'}
+                    popperClassName="date-picker-popper"
+                    calendarClassName="date-picker-calendar"
+                  />
+                </div>
                 {errors.eventDate && (
                   <p className="mt-1 text-sm text-red-400">{errors.eventDate}</p>
                 )}
