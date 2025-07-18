@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { MapPin, Phone, Mail, MessageCircle, Instagram, Send, Clock, Facebook, Linkedin, CheckCircle, AlertCircle, X, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { supabase, type ContactFormData, isValidEmail, sanitizeInput } from '../lib/supabase';
-import { parsePhoneNumber, isValidPhoneNumber, getCountries, getCountryCallingCode } from 'libphonenumber-js';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -74,10 +74,13 @@ const Contact: React.FC = () => {
     
     // Validate phone number if provided
     if (formData.phone.trim()) {
-      const fullPhoneNumber = selectedCountryCode + formData.phone.replace(/^\+?[\d\s-]+/, '').replace(/\D/g, '');
+      const cleanPhoneNumber = formData.phone.replace(/\D/g, '');
+      const fullPhoneNumber = selectedCountryCode + cleanPhoneNumber;
+      const selectedCountry = countryCodes.find(c => c.code === selectedCountryCode);
+      
       try {
-        const phoneNumber = parsePhoneNumber(fullPhoneNumber);
-        if (!phoneNumber || !phoneNumber.isValid()) {
+        const phoneNumber = parsePhoneNumberFromString(fullPhoneNumber, selectedCountry?.country);
+        if (!phoneNumber?.isValid()) {
           newErrors.phone = language === 'en' ? 'Invalid phone number format' : 'تنسيق رقم الهاتف غير صحيح';
         }
       } catch (error) {
@@ -114,7 +117,9 @@ const Contact: React.FC = () => {
       const contactData: ContactFormData = {
         full_name: sanitizeInput(formData.name),
         email: sanitizeInput(formData.email),
-        phone: formData.phone.trim() ? sanitizeInput(selectedCountryCode + formData.phone.replace(/^\+?[\d\s-]+/, '').replace(/\D/g, '')) : null,
+        phone: formData.phone.trim() ? 
+          sanitizeInput(selectedCountryCode + formData.phone.replace(/\D/g, '')) : 
+          null,
         event_type: formData.eventType,
         preferred_date: formData.eventDate instanceof Date ? formData.eventDate.toISOString().split('T')[0] : null,
         message: sanitizeInput(formData.message),
@@ -176,8 +181,32 @@ const Contact: React.FC = () => {
       phone: value,
     });
     
-    // Clear phone error when user starts typing
-    if (errors.phone) {
+    // Real-time validation
+    if (value.trim()) {
+      const fullPhoneNumber = selectedCountryCode + value;
+      const selectedCountry = countryCodes.find(c => c.code === selectedCountryCode);
+      
+      try {
+        const phoneNumber = parsePhoneNumberFromString(fullPhoneNumber, selectedCountry?.country);
+        if (!phoneNumber?.isValid()) {
+          setErrors({
+            ...errors,
+            phone: language === 'en' ? 'Invalid phone number format' : 'تنسيق رقم الهاتف غير صحيح',
+          });
+        } else {
+          // Clear error if valid
+          const newErrors = { ...errors };
+          delete newErrors.phone;
+          setErrors(newErrors);
+        }
+      } catch (error) {
+        setErrors({
+          ...errors,
+          phone: language === 'en' ? 'Invalid phone number format' : 'تنسيق رقم الهاتف غير صحيح',
+        });
+      }
+    } else {
+      // Clear error when field is empty
       setErrors({
         ...errors,
         phone: '',
@@ -189,8 +218,32 @@ const Contact: React.FC = () => {
     setSelectedCountryCode(code);
     setShowCountryDropdown(false);
     
-    // Clear phone error when country changes
-    if (errors.phone) {
+    // Re-validate phone number with new country context
+    if (formData.phone.trim()) {
+      const fullPhoneNumber = code + formData.phone.replace(/\D/g, '');
+      const selectedCountry = countryCodes.find(c => c.code === code);
+      
+      try {
+        const phoneNumber = parsePhoneNumberFromString(fullPhoneNumber, selectedCountry?.country);
+        if (!phoneNumber?.isValid()) {
+          setErrors({
+            ...errors,
+            phone: language === 'en' ? 'Invalid phone number format' : 'تنسيق رقم الهاتف غير صحيح',
+          });
+        } else {
+          // Clear error if valid
+          const newErrors = { ...errors };
+          delete newErrors.phone;
+          setErrors(newErrors);
+        }
+      } catch (error) {
+        setErrors({
+          ...errors,
+          phone: language === 'en' ? 'Invalid phone number format' : 'تنسيق رقم الهاتف غير صحيح',
+        });
+      }
+    } else {
+      // Clear error when no phone number
       setErrors({
         ...errors,
         phone: '',
