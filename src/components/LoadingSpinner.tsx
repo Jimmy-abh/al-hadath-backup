@@ -6,7 +6,7 @@ const LoadingSpinner: React.FC = () => {
   const { language } = useLanguage();
   
   return (
-    <div className="fixed inset-0 bg-dark-200 flex items-center justify-center z-50 backdrop-blur-sm">
+    <div className="fixed inset-0 bg-white dark:bg-dark-200 flex items-center justify-center z-50 backdrop-blur-sm transition-colors duration-300">
       <div className="text-center">
         {/* Enhanced Loading Animation */}
         <motion.div 
@@ -50,10 +50,10 @@ const LoadingSpinner: React.FC = () => {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="text-center"
         >
-          <h3 className="text-teal-400 font-playfair text-xl font-semibold mb-2">
+          <h3 className="text-teal-500 dark:text-teal-400 font-playfair text-xl font-semibold mb-2 transition-colors duration-300">
             {language === 'en' ? 'Al-Hadath Events' : 'الحدث للفعاليات'}
           </h3>
-          <p className="text-beige-200 font-inter text-sm">
+          <p className="text-gray-600 dark:text-beige-200 font-inter text-sm transition-colors duration-300">
             {language === 'en' ? 'Loading your experience...' : 'جاري تحميل تجربتك...'}
           </p>
         </motion.div>

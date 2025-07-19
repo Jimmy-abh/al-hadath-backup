@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const { t, language } = useLanguage();
 
   return (
-    <footer className="bg-dark-300 text-white">
+    <footer className="bg-gray-100 dark:bg-dark-300 text-gray-900 dark:text-white transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6 py-12 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Info */}
@@ -20,18 +20,18 @@ const Footer: React.FC = () => {
                   className="w-full h-full object-contain drop-shadow-lg"
                 />
               </div>
-              <span className="text-white font-playfair text-lg lg:text-xl font-bold">
+              <span className="text-gray-900 dark:text-white font-playfair text-lg lg:text-xl font-bold transition-colors duration-300">
                 {t('companyName')}
               </span>
             </div>
-            <p className="text-beige-100 text-sm sm:text-base font-inter leading-relaxed">
+            <p className="text-gray-600 dark:text-beige-100 text-sm sm:text-base font-inter leading-relaxed transition-colors duration-300">
               {t('companyDescription')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-teal-400 font-playfair text-lg lg:text-xl font-semibold">
+            <h3 className="text-teal-500 dark:text-teal-400 font-playfair text-lg lg:text-xl font-semibold transition-colors duration-300">
               {t('quickLinks')}
             </h3>
             <div className="space-y-2 sm:space-y-3">
@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className="block text-beige-100 hover:text-teal-400 text-sm sm:text-base font-inter transition-colors"
+                  className="block text-gray-600 dark:text-beige-100 hover:text-teal-500 dark:hover:text-teal-400 text-sm sm:text-base font-inter transition-colors"
                   onClick={() => {
                     // Ensure proper scroll to top with delay for route change
                     setTimeout(() => {
@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-teal-400 font-playfair text-lg lg:text-xl font-semibold">
+            <h3 className="text-teal-500 dark:text-teal-400 font-playfair text-lg lg:text-xl font-semibold transition-colors duration-300">
               {t('servicesFooter')}
             </h3>
             <div className="space-y-2 sm:space-y-3">
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
                 <Link
                   key={service.key}
                   to={`/services#${service.key}`}
-                  className="block text-beige-100 hover:text-teal-400 text-sm sm:text-base font-inter transition-colors"
+                  className="block text-gray-600 dark:text-beige-100 hover:text-teal-500 dark:hover:text-teal-400 text-sm sm:text-base font-inter transition-colors"
                   onClick={() => {
                     // Navigate to services with specific section
                     setTimeout(() => {
@@ -93,25 +93,25 @@ const Footer: React.FC = () => {
 
           {/* Contact Info */}
           <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-teal-400 font-playfair text-lg lg:text-xl font-semibold">
+            <h3 className="text-teal-500 dark:text-teal-400 font-playfair text-lg lg:text-xl font-semibold transition-colors duration-300">
               {t('contactInfo')}
             </h3>
             <div className="space-y-3 sm:space-y-4">
               <div className="flex items-start space-x-3 rtl:space-x-reverse">
-                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400 mt-1 flex-shrink-0" />
-                <span className="text-beige-100 text-sm sm:text-base font-inter">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-teal-500 dark:text-teal-400 mt-1 flex-shrink-0 transition-colors duration-300" />
+                <span className="text-gray-600 dark:text-beige-100 text-sm sm:text-base font-inter transition-colors duration-300">
                   {language === 'en' ? 'Baghdad, Iraq' : 'بغداد، العراق'}
                 </span>
               </div>
               <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                <Phone className={`w-4 h-4 sm:w-5 sm:h-5 text-teal-400 flex-shrink-0 ${language === 'ar' ? 'phone-icon' : ''}`} />
-                <span className="text-beige-100 text-sm sm:text-base font-inter" dir="ltr">
+                <Phone className={`w-4 h-4 sm:w-5 sm:h-5 text-teal-500 dark:text-teal-400 flex-shrink-0 transition-colors duration-300 ${language === 'ar' ? 'phone-icon' : ''}`} />
+                <span className="text-gray-600 dark:text-beige-100 text-sm sm:text-base font-inter transition-colors duration-300" dir="ltr">
                   +964 783 344 5511
                 </span>
               </div>
               <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400 flex-shrink-0" />
-                <span className="text-beige-100 text-sm sm:text-base font-inter">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-teal-500 dark:text-teal-400 flex-shrink-0 transition-colors duration-300" />
+                <span className="text-gray-600 dark:text-beige-100 text-sm sm:text-base font-inter transition-colors duration-300">
                   info@alhadathevents.com
                 </span>
               </div>
@@ -119,7 +119,7 @@ const Footer: React.FC = () => {
 
             {/* Social Links */}
             <div className="pt-2">
-              <h4 className="text-base font-playfair font-semibold text-white mb-4">
+              <h4 className="text-base font-playfair font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                 {t('followUs')}
               </h4>
               <div className="flex space-x-4 rtl:space-x-reverse">
@@ -163,15 +163,15 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Legal Footer */}
-        <div className="border-t border-teal-500/20 mt-8 lg:mt-12 pt-6 lg:pt-8">
+        <div className="border-t border-gray-300 dark:border-teal-500/20 mt-8 lg:mt-12 pt-6 lg:pt-8 transition-colors duration-300">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <p className="text-beige-100 text-sm sm:text-base font-inter text-center sm:text-left">
+            <p className="text-gray-600 dark:text-beige-100 text-sm sm:text-base font-inter text-center sm:text-left transition-colors duration-300">
               {t('allRightsReserved')}
             </p>
             <div className="flex space-x-6 rtl:space-x-reverse">
               <Link
                 to="/privacy-policy"
-                className="text-beige-100 hover:text-teal-400 text-sm font-inter transition-colors"
+                className="text-gray-600 dark:text-beige-100 hover:text-teal-500 dark:hover:text-teal-400 text-sm font-inter transition-colors"
                 onClick={() => {
                   setTimeout(() => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -182,7 +182,7 @@ const Footer: React.FC = () => {
               </Link>
               <Link
                 to="/terms-of-service"
-                className="text-beige-100 hover:text-teal-400 text-sm font-inter transition-colors"
+                className="text-gray-600 dark:text-beige-100 hover:text-teal-500 dark:hover:text-teal-400 text-sm font-inter transition-colors"
                 onClick={() => {
                   setTimeout(() => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });

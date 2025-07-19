@@ -36,7 +36,7 @@ const Home: React.FC = () => {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
 
   return (
-    <div className="bg-dark-200 scroll-smooth">
+    <div className="bg-white dark:bg-dark-200 scroll-smooth transition-colors duration-300">
       {/* Hero Section - Enhanced spacing and centering */}
       <section className="relative h-screen overflow-hidden">
         <AnimatePresence mode="wait">
@@ -190,7 +190,7 @@ const ServicesSection: React.FC = () => {
   ];
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-100">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -198,10 +198,10 @@ const ServicesSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
             {t('servicesTitle')}
           </h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
             {t('servicesSubtitle')}
           </p>
         </motion.div>
@@ -215,7 +215,7 @@ const ServicesSection: React.FC = () => {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className="group card-hover"
             >
-              <div className="relative overflow-hidden rounded-xl bg-dark-50 border border-teal-500/20 hover:border-teal-500/40 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <div className="relative overflow-hidden rounded-xl bg-white dark:bg-dark-50 border border-gray-200 dark:border-teal-500/20 hover:border-teal-500/40 transition-all duration-300 shadow-lg hover:shadow-xl">
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src={service.image}
@@ -223,14 +223,14 @@ const ServicesSection: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="eager"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-200 via-dark-200/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 dark:from-dark-200 via-gray-900/50 dark:via-dark-200/50 to-transparent" />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
                   <div className="text-2xl sm:text-3xl mb-3">{service.icon}</div>
                   <h3 className="text-lg sm:text-xl font-playfair font-semibold text-white mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-beige-200 text-sm sm:text-base font-inter leading-relaxed">
+                  <p className="text-gray-200 dark:text-beige-200 text-sm sm:text-base font-inter leading-relaxed">
                     {service.description}
                   </p>
                 </div>
@@ -268,7 +268,7 @@ const AboutSection: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-200">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-dark-200 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
           <motion.div
@@ -276,16 +276,16 @@ const AboutSection: React.FC = () => {
             animate={inView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-4 sm:mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
               {t('aboutTitle')}
             </h2>
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-semibold text-teal-400 mb-4 sm:mb-6">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-semibold text-teal-500 dark:text-teal-400 mb-4 sm:mb-6 transition-colors duration-300">
               {t('missionTitle')}
             </h3>
-            <p className="text-base sm:text-lg lg:text-xl text-beige-100 mb-6 sm:mb-8 font-inter leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-beige-100 mb-6 sm:mb-8 font-inter leading-relaxed transition-colors duration-300">
               {t('missionText')}
             </p>
-            <p className="text-sm sm:text-base lg:text-lg text-beige-200 font-inter leading-relaxed mb-8 sm:mb-10">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-500 dark:text-beige-200 font-inter leading-relaxed mb-8 sm:mb-10 transition-colors duration-300">
               {t('aboutExtended')}
             </p>
             <motion.div
@@ -346,7 +346,7 @@ const TestimonialsSection: React.FC = () => {
   ];
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-100">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -354,10 +354,10 @@ const TestimonialsSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
             {t('testimonialsTitle')}
           </h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
             {t('testimonialsSubtitle')}
           </p>
         </motion.div>
@@ -369,21 +369,21 @@ const TestimonialsSection: React.FC = () => {
               initial={{ y: 50, opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="bg-dark-50 border border-teal-500/20 rounded-xl p-6 sm:p-8 hover:border-teal-500/40 transition-all duration-300 shadow-lg hover:shadow-xl card-hover"
+              className="bg-white dark:bg-dark-50 border border-gray-200 dark:border-teal-500/20 rounded-xl p-6 sm:p-8 hover:border-teal-500/40 transition-all duration-300 shadow-lg hover:shadow-xl card-hover"
             >
               <div className="flex space-x-1 mb-4 sm:mb-6">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 text-teal-400 fill-current" />
                 ))}
               </div>
-              <p className="text-beige-100 font-inter leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
+              <p className="text-gray-600 dark:text-beige-100 font-inter leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base transition-colors duration-300">
                 "{testimonial.content}"
               </p>
               <div>
-                <h4 className="text-white font-playfair font-semibold text-base sm:text-lg">
+                <h4 className="text-gray-900 dark:text-white font-playfair font-semibold text-base sm:text-lg transition-colors duration-300">
                   {testimonial.name}
                 </h4>
-                <p className="text-teal-400 text-sm font-inter">
+                <p className="text-teal-500 dark:text-teal-400 text-sm font-inter transition-colors duration-300">
                   {testimonial.role}
                 </p>
               </div>
@@ -410,7 +410,7 @@ const CTASection: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-4 sm:mb-6">
             {t('finalCtaTitle')}
           </h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-beige-100 mb-8 sm:mb-10 max-w-3xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-100 dark:text-beige-100 mb-8 sm:mb-10 max-w-3xl mx-auto font-inter leading-relaxed">
             {t('finalCtaDescription')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
@@ -477,7 +477,7 @@ const PartnersSection: React.FC = () => {
   const duplicatedPartners = [...partners, ...partners];
   
   return (
-    <section ref={ref} className="py-12 sm:py-16 lg:py-20 bg-dark-200">
+    <section ref={ref} className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-dark-200 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
@@ -485,10 +485,10 @@ const PartnersSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-8 sm:mb-12"
         >
-          <h3 className="text-xl sm:text-2xl font-playfair font-semibold text-white mb-2">
+          <h3 className="text-xl sm:text-2xl font-playfair font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
             {language === 'en' ? 'Trusted Partners' : 'شركاؤنا الموثوقون'}
           </h3>
-          <p className="text-beige-200 font-inter text-sm sm:text-base">
+          <p className="text-gray-600 dark:text-beige-200 font-inter text-sm sm:text-base transition-colors duration-300">
             {language === 'en' 
               ? 'Working with leading organizations across Iraq'
               : 'نعمل مع المؤسسات الرائدة في جميع أنحاء العراق'
@@ -504,7 +504,7 @@ const PartnersSection: React.FC = () => {
         >
           {/* Teal Background Strip for Logo Carousel */}
           <div 
-            className="bg-teal-700 rounded-xl overflow-hidden py-6 sm:py-8 w-full"
+            className="bg-teal-600 dark:bg-teal-700 rounded-xl overflow-hidden py-6 sm:py-8 w-full transition-colors duration-300"
             style={{ minHeight: '140px' }}
           >
             {/* Carousel track with explicit width and flex layout */}
