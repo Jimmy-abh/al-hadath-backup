@@ -472,14 +472,9 @@ const PartnersSection: React.FC = () => {
     { name: 'Logo 10', logo: '/images/logo10.png' },
   ];
   
-  // Debug: Log partners array to console
-  console.log('PartnersSection - Partners array:', partners);
-  console.log('PartnersSection - Partners length:', partners.length);
-  console.log('PartnersSection - inView:', inView);
 
   // Duplicate partners array for seamless infinite scroll
   const duplicatedPartners = [...partners, ...partners];
-  console.log('PartnersSection - Duplicated partners length:', duplicatedPartners.length);
   
   return (
     <section ref={ref} className="py-12 sm:py-16 lg:py-20 bg-dark-200">
@@ -507,51 +502,36 @@ const PartnersSection: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative w-full"
         >
-          {/* Debug: Teal Background Strip for Logo Carousel with explicit dimensions */}
+          {/* Teal Background Strip for Logo Carousel */}
           <div 
             className="bg-teal-700 rounded-xl overflow-hidden py-6 sm:py-8 w-full"
-            style={{ minHeight: '120px' }}
+            style={{ minHeight: '140px' }}
           >
-            {/* Debug: Carousel track with explicit width and flex layout */}
+            {/* Carousel track with explicit width and flex layout */}
             <div 
-              className="flex animate-scroll items-center h-20 sm:h-24 lg:h-28"
+              className="flex animate-scroll items-center h-24 sm:h-28 lg:h-32"
               style={{ 
                 width: `${duplicatedPartners.length * 200}px`,
                 minWidth: '100%'
               }}
             >
-              {/* Debug: Log each partner being rendered */}
               {duplicatedPartners.map((partner, index) => (
                 <div
                   key={`${partner.name}-${index}`}
-                  className="flex-shrink-0 flex items-center justify-center mx-4 sm:mx-6 lg:mx-8 hover:scale-105 transition-all duration-300 ease-in-out"
+                  className="flex-shrink-0 flex items-center justify-center mx-4 sm:mx-6 lg:mx-8 hover:scale-110 transition-all duration-300 ease-in-out"
                   style={{ 
                     width: '160px',
-                    height: '80px',
-                    border: '1px solid yellow' // Additional container debug
+                    height: '96px'
                   }}
-                  onLoad={() => console.log(`Container ${index} rendered for ${partner.name}`)}
                 >
-                  {/* Debug: Enhanced img with multiple diagnostic styles */}
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    style={{ 
-                      border: '2px solid red',
-                      backgroundColor: 'rgba(255,255,255,0.1)',
-                      minWidth: '60px',
-                      minHeight: '40px'
-                    }}
                     className="max-w-full max-h-full object-contain filter drop-shadow-lg"
                   />
                 </div>
               ))}
             </div>
-          </div>
-          
-          {/* Debug: Show partners count */}
-          <div className="text-center mt-4 text-white text-sm">
-            Debug: {partners.length} partners, {duplicatedPartners.length} total items
           </div>
         </motion.div>
       </div>
