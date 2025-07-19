@@ -543,16 +543,6 @@ const PartnersSection: React.FC = () => {
                       minHeight: '40px'
                     }}
                     className="max-w-full max-h-full object-contain filter drop-shadow-lg"
-                    onError={(e) => {
-                      // Debug: Log errors but don't hide images
-                      const target = e.target as HTMLImageElement;
-                      console.error(`Failed to load image: ${partner.logo}`);
-                      target.style.backgroundColor = 'rgba(255,0,0,0.3)';
-                      target.alt = `MISSING: ${partner.name}`;
-                    }}
-                    onLoad={(e) => {
-                      console.log(`Successfully loaded: ${partner.logo}`);
-                    }}
                   />
                 </div>
               ))}
