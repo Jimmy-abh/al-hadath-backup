@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useCallback } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import SEOHead from './components/SEOHead';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -52,28 +53,30 @@ function App() {
   };
 
   return (
-    <LanguageProvider>
-      <Router>
-        <div className="min-h-screen bg-dark-200 scroll-smooth">
-          <DynamicTitle />
-          <SEOHead />
-          <ScrollToTop />
-          <Header />
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-            </Routes>
-          </Suspense>
-          <Footer />
-        </div>
-      </Router>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <Router>
+          <div className="min-h-screen bg-white dark:bg-dark-200 scroll-smooth transition-colors duration-300">
+            <DynamicTitle />
+            <SEOHead />
+            <ScrollToTop />
+            <Header />
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
+              </Routes>
+            </Suspense>
+            <Footer />
+          </div>
+        </Router>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 
