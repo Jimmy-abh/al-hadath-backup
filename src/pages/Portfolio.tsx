@@ -258,7 +258,6 @@ const PortfolioGrid: React.FC<{
                 className="group cursor-pointer"
                 onClick={() => setSelectedProject(item)}
               >
-                <div className="relative overflow-hidden rounded-xl bg-dark-50 border border-teal-500/20 hover:border-teal-500/40 transition-all duration-300 shadow-lg hover:shadow-xl">
                 <div className="relative overflow-hidden rounded-xl bg-gray-50 dark:bg-dark-50 border border-gray-200 dark:border-teal-500/20 hover:border-teal-500/40 transition-all duration-300 shadow-lg hover:shadow-xl">
                   <div className="aspect-[4/3] overflow-hidden">
                     <img
@@ -374,7 +373,6 @@ const ProjectModal: React.FC<{
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.8, opacity: 0 }}
-          className="relative max-w-4xl w-full bg-dark-100 rounded-xl overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto"
           className="relative max-w-4xl w-full bg-white dark:bg-dark-100 rounded-xl overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto transition-colors duration-300"
           onClick={(e) => e.stopPropagation()}
         >
@@ -474,7 +472,6 @@ const ProjectModal: React.FC<{
                   <iframe
                     src={selectedProject.video.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0]}
                     title={`${language === 'en' ? (selectedProject.titleEn || '') : (selectedProject.titleAr || '')} - Video`}
-                    className="absolute top-0 left-0 w-full h-full rounded-lg border border-teal-500/20"
                     className="absolute top-0 left-0 w-full h-full rounded-lg border border-gray-200 dark:border-teal-500/20"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
