@@ -299,12 +299,12 @@ const GallerySection: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const galleryImages = [
-    'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-    'https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-    'https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-    'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-    'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-    'https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    "https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Behind-the-Scenes-1.JPG",
+    "https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Behind-the-Scenes-2.jfif",
+    "https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Behind-the-Scenes-3.jfif",
+    "https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Behind-the-Scenes-4.JPG",
+    "https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Behind-the-Scenes-5.JPG",
+    "https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Behind-the-Scenes-6.JPG",
   ];
 
   return (
