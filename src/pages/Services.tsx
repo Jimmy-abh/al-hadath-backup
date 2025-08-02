@@ -144,7 +144,6 @@ const Services: React.FC = () => {
           />
           <div className="absolute inset-0 bg-black/50 dark:bg-dark-200/80" />
         </div>
-      <section id="services-tabs" ref={ref} className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
         <div className="relative container mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -153,7 +152,7 @@ const Services: React.FC = () => {
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
               {t('services')}
-            </h1>
+            </h2>
             <p className="text-lg sm:text-xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
               {language === 'en' 
                 ? 'Comprehensive event planning and production services tailored to your unique needs'
@@ -382,6 +381,7 @@ const ProcessSection: React.FC = () => {
     },
   ];
 
+  return (
     <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
