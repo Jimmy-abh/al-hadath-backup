@@ -12,18 +12,19 @@ const Portfolio: React.FC = () => {
   const portfolioItems = [
     {
       id: 1,
-      titleEn: 'Baghdad International Business Conference',
-      titleAr: 'مؤتمر بغداد الدولي للأعمال',
+      titleEn: 'REACH Health EXPO',
+      titleAr: 'معرض REACH',
       category: 'conferences',
       location: language === 'en' ? 'Baghdad' : 'بغداد',
       year: '2024',
       images: [
-        'https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-        'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-        'https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+        'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//REACH-event-1.jfif',
+        'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//REACH-Event-2.JPG',
+        'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//REACH-event-3.jfif',
       ],
-      descriptionEn: 'A prestigious international business conference bringing together industry leaders and entrepreneurs from across the Middle East to discuss economic opportunities and partnerships.',
-      descriptionAr: 'مؤتمر أعمال دولي مرموق يجمع قادة الصناعة ورجال الأعمال من جميع أنحاء الشرق الأوسط لمناقشة الفرص الاقتصادية والشراكات.',
+      descriptionEn: 'The REACH Health EXPO is Baghdad\'s largest health exhibition, held for five consecutive years with resounding success. This premier event brings together healthcare leaders, medical innovators, and the wider community to showcase breakthroughs, foster partnerships, and promote better health awareness across Iraq.',
+      descriptionAr: 'يُعد معرض REACH الصحي أكبر معرض صحي في بغداد، ويُقام منذ خمس سنوات متتالية بنجاح كبير. يجمع هذا الحدث الرائد قادة الرعاية الصحية والمبتكرين الطبيين والمجتمع بأكمله لعرض أحدث التطورات، وتعزيز الشراكات، ونشر الوعي الصحي في جميع أنحاء العراق.',
+      video: 'https://youtu.be/vya5I_w37_k?si=q10vuB4J6KlPeRjz',
     },
     {
       id: 2,
@@ -505,17 +506,30 @@ const ProjectModal: React.FC<{
               </p>
             </div>
 
-            {/* Video Placeholder */}
+            {/* Video Section */}
             <div className="mb-8">
-              <div className="bg-dark-50 border border-teal-500/20 rounded-lg p-8 text-center">
-                <Play className="w-12 h-12 text-teal-400 mx-auto mb-4" />
-                <p className="text-beige-200 font-inter">
-                  {language === 'en' 
-                    ? 'Video content will be available soon'
-                    : 'المحتوى المرئي سيكون متاحاً قريباً'
-                  }
-                </p>
-              </div>
+              {selectedProject.video ? (
+                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                  <iframe
+                    src={selectedProject.video.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0]}
+                    title={`${language === 'en' ? (selectedProject.titleEn || '') : (selectedProject.titleAr || '')} - Video`}
+                    className="absolute top-0 left-0 w-full h-full rounded-lg border border-teal-500/20"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <div className="bg-dark-50 border border-teal-500/20 rounded-lg p-8 text-center">
+                  <Play className="w-12 h-12 text-teal-400 mx-auto mb-4" />
+                  <p className="text-beige-200 font-inter">
+                    {language === 'en' 
+                      ? 'Video content will be available soon'
+                      : 'المحتوى المرئي سيكون متاحاً قريباً'
+                    }
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Action Buttons */}
