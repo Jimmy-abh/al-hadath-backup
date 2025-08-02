@@ -272,13 +272,13 @@ const TeamSection: React.FC = () => {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className="text-center group"
             >
-              <div className="relative overflow-hidden rounded-xl mb-6">
+              <div className="relative overflow-hidden rounded-xl mb-6 group">
                 <img
                   src={member.image}
                   alt={language === 'en' ? member.name : member.nameAr}
-                  className={`w-full h-64 object-cover ${member.position || 'object-center'} ${member.scale || 'scale-100'} group-hover:scale-100 transition-transform duration-500`}
+                  className={`w-full h-64 object-cover ${member.position || 'object-center'} ${member.scale || 'scale-100'} group-hover:scale-105 transition-transform duration-500 rounded-xl`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-teal-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-teal-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
               </div>
               <h3 className="text-lg sm:text-xl font-playfair font-semibold text-white mb-2">
                 {language === 'en' ? member.name : member.nameAr}
