@@ -120,7 +120,7 @@ const Portfolio: React.FC = () => {
     : portfolioItems.filter(item => item.category === filter);
 
   return (
-    <div className="bg-dark-200 pt-20 lg:pt-24 scroll-smooth">
+    <div className="bg-white dark:bg-dark-200 pt-20 lg:pt-24 scroll-smooth transition-colors duration-300">
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
@@ -129,7 +129,7 @@ const Portfolio: React.FC = () => {
             alt="Our portfolio"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-dark-200/80" />
+          <div className="absolute inset-0 bg-black/50 dark:bg-dark-200/80" />
         </div>
         
         <div className="relative container mx-auto px-4 sm:px-6 text-center">
@@ -185,7 +185,7 @@ const FilterSection: React.FC<{
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section ref={ref} className="py-12 sm:py-16 bg-dark-100">
+    <section ref={ref} className="py-12 sm:py-16 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
@@ -193,7 +193,7 @@ const FilterSection: React.FC<{
           transition={{ duration: 0.8 }}
           className="flex flex-wrap justify-center gap-3 sm:gap-4"
         >
-          <div className="flex items-center space-x-2 rtl:space-x-reverse text-beige-100 mb-4 lg:mb-0">
+          <div className="flex items-center space-x-2 rtl:space-x-reverse text-gray-600 dark:text-beige-100 mb-4 lg:mb-0 transition-colors duration-300">
             <Filter className="w-5 h-5" />
             <span className="font-inter text-sm sm:text-base">
               {language === 'en' ? 'Filter by:' : 'تصفية حسب:'}
@@ -206,7 +206,7 @@ const FilterSection: React.FC<{
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-inter font-medium transition-all duration-300 text-sm sm:text-base ${
                 filter === category.id
                   ? 'bg-teal-500 text-white shadow-lg'
-                  : 'bg-dark-50 text-white hover:bg-dark-300 border border-teal-500/20'
+                  : 'bg-white dark:bg-dark-50 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-dark-300 border border-gray-200 dark:border-teal-500/20 transition-colors duration-300'
               }`}
               aria-label={`${language === 'en' ? 'Filter by' : 'تصفية حسب'} ${language === 'en' ? category.labelEn : category.labelAr}`}
             >
@@ -227,7 +227,7 @@ const PortfolioGrid: React.FC<{
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-200">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-dark-200 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -235,10 +235,10 @@ const PortfolioGrid: React.FC<{
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
             {language === 'en' ? 'Our Work' : 'أعمالنا'}
           </h2>
-          <p className="text-lg sm:text-xl text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
             {language === 'en' 
               ? 'Each project tells a unique story of creativity, precision, and unforgettable moments'
               : 'كل مشروع يحكي قصة فريدة من الإبداع والدقة واللحظات التي لا تُنسى'
@@ -259,6 +259,7 @@ const PortfolioGrid: React.FC<{
                 onClick={() => setSelectedProject(item)}
               >
                 <div className="relative overflow-hidden rounded-xl bg-dark-50 border border-teal-500/20 hover:border-teal-500/40 transition-all duration-300 shadow-lg hover:shadow-xl">
+                <div className="relative overflow-hidden rounded-xl bg-gray-50 dark:bg-dark-50 border border-gray-200 dark:border-teal-500/20 hover:border-teal-500/40 transition-all duration-300 shadow-lg hover:shadow-xl">
                   <div className="aspect-[4/3] overflow-hidden">
                     <img
                       src={item.images[0]}
@@ -272,7 +273,7 @@ const PortfolioGrid: React.FC<{
                     <h3 className="text-lg sm:text-xl font-playfair font-semibold text-white mb-2">
                       {language === 'en' ? item.titleEn : item.titleAr}
                     </h3>
-                    <div className="flex items-center space-x-4 rtl:space-x-reverse text-xs sm:text-sm text-beige-200 font-inter">
+                    <div className="flex items-center space-x-4 rtl:space-x-reverse text-xs sm:text-sm text-gray-200 dark:text-beige-200 font-inter">
                       <div className="flex items-center space-x-1 rtl:space-x-reverse">
                         <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
                         <span>{item.location}</span>
@@ -374,6 +375,7 @@ const ProjectModal: React.FC<{
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.8, opacity: 0 }}
           className="relative max-w-4xl w-full bg-dark-100 rounded-xl overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto"
+          className="relative max-w-4xl w-full bg-white dark:bg-dark-100 rounded-xl overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto transition-colors duration-300"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
@@ -399,7 +401,7 @@ const ProjectModal: React.FC<{
               />
             ) : (
               <div className="w-full h-full bg-dark-50 flex items-center justify-center">
-                <p className="text-beige-200 font-inter">
+                <p className="text-gray-500 dark:text-beige-200 font-inter transition-colors duration-300">
                   {language === 'en' ? 'No images available' : 'لا توجد صور متاحة'}
                 </p>
               </div>
@@ -444,10 +446,10 @@ const ProjectModal: React.FC<{
           {/* Content */}
           <div className="p-6 sm:p-8">
             <div className="mb-6">
-              <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-white mb-2">
+              <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
                 {language === 'en' ? (selectedProject.titleEn || '') : (selectedProject.titleAr || '')}
               </h2>
-              <div className="flex items-center space-x-4 rtl:space-x-reverse text-sm text-beige-200 font-inter">
+              <div className="flex items-center space-x-4 rtl:space-x-reverse text-sm text-gray-500 dark:text-beige-200 font-inter transition-colors duration-300">
                 <div className="flex items-center space-x-2 rtl:space-x-reverse">
                   <MapPin className="w-4 h-4" />
                   <span>{selectedProject.location || ''}</span>
@@ -460,7 +462,7 @@ const ProjectModal: React.FC<{
             </div>
 
             <div className="mb-8">
-              <p className="text-beige-100 font-inter leading-relaxed text-base sm:text-lg">
+              <p className="text-gray-600 dark:text-beige-100 font-inter leading-relaxed text-base sm:text-lg transition-colors duration-300">
                 {language === 'en' ? (selectedProject.descriptionEn || '') : (selectedProject.descriptionAr || '')}
               </p>
             </div>
@@ -473,15 +475,16 @@ const ProjectModal: React.FC<{
                     src={selectedProject.video.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0]}
                     title={`${language === 'en' ? (selectedProject.titleEn || '') : (selectedProject.titleAr || '')} - Video`}
                     className="absolute top-0 left-0 w-full h-full rounded-lg border border-teal-500/20"
+                    className="absolute top-0 left-0 w-full h-full rounded-lg border border-gray-200 dark:border-teal-500/20"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
                 </div>
               ) : (
-                <div className="bg-dark-50 border border-teal-500/20 rounded-lg p-8 text-center">
+                <div className="bg-gray-50 dark:bg-dark-50 border border-gray-200 dark:border-teal-500/20 rounded-lg p-8 text-center transition-colors duration-300">
                   <Play className="w-12 h-12 text-teal-400 mx-auto mb-4" />
-                  <p className="text-beige-200 font-inter">
+                  <p className="text-gray-500 dark:text-beige-200 font-inter transition-colors duration-300">
                     {language === 'en' 
                       ? 'Video content will be available soon'
                       : 'المحتوى المرئي سيكون متاحاً قريباً'
@@ -505,7 +508,7 @@ const ProjectModal: React.FC<{
               </a>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="px-6 py-3 border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-dark-200 font-semibold rounded-lg transition-colors"
+                className="px-6 py-3 border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white font-semibold rounded-lg transition-colors"
                 aria-label={language === 'en' ? 'Close modal' : 'إغلاق النافذة'}
               >
                 {language === 'en' ? 'Close' : 'إغلاق'}
@@ -530,10 +533,10 @@ const CTASection: React.FC = () => {
           animate={inView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6 transition-colors duration-300">
             {language === 'en' ? 'Let\'s Create Your Story' : 'دعنا نصنع قصتك'}
           </h2>
-          <p className="text-lg sm:text-xl text-beige-100 mb-8 sm:mb-10 max-w-3xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-100 dark:text-beige-100 mb-8 sm:mb-10 max-w-3xl mx-auto font-inter leading-relaxed transition-colors duration-300">
             {language === 'en' 
               ? 'Ready to add your event to our portfolio? Contact us to start planning your unforgettable experience.'
               : 'مستعد لإضافة فعاليتك إلى أعمالنا؟ تواصل معنا لبدء تخطيط تجربتك التي لا تُنسى'

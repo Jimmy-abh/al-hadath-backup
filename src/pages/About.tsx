@@ -8,7 +8,7 @@ const About: React.FC = () => {
   const { t, language } = useLanguage();
 
   return (
-    <div className="bg-dark-200 pt-20 lg:pt-24 scroll-smooth">
+    <div className="bg-white dark:bg-dark-200 pt-20 lg:pt-24 scroll-smooth transition-colors duration-300">
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
@@ -17,7 +17,7 @@ const About: React.FC = () => {
             alt="About us"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-dark-200/80" />
+          <div className="absolute inset-0 bg-black/50 dark:bg-dark-200/80" />
         </div>
         
         <div className="relative container mx-auto px-4 sm:px-6 text-center">
@@ -62,7 +62,7 @@ const MissionSection: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-100">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
@@ -70,16 +70,16 @@ const MissionSection: React.FC = () => {
             animate={inView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
               {language === 'en' ? 'Our Mission' : 'مهمتنا'}
             </h2>
-            <p className="text-base sm:text-lg text-beige-100 mb-6 sm:mb-8 font-inter leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-600 dark:text-beige-100 mb-6 sm:mb-8 font-inter leading-relaxed transition-colors duration-300">
               {language === 'en' 
                 ? 'To create extraordinary experiences that exceed expectations and leave lasting impressions.'
                 : 'إنشاء تجارب استثنائية تتجاوز التوقعات وتترك انطباعات دائمة'
               }
             </p>
-            <p className="text-sm sm:text-base text-beige-200 font-inter leading-relaxed mb-8 sm:mb-10">
+            <p className="text-sm sm:text-base text-gray-500 dark:text-beige-200 font-inter leading-relaxed mb-8 sm:mb-10 transition-colors duration-300">
               {language === 'en'
                 ? 'We believe that every event tells a story, and we are here to help you tell yours in the most beautiful and memorable way possible. Our commitment to excellence and attention to detail has made us the trusted choice for discerning clients across Iraq.'
                 : 'نؤمن بأن كل فعالية تحكي قصة، ونحن هنا لمساعدتك على حكاية قصتك بأجمل وأكثر الطرق التي لا تُنسى. التزامنا بالتميز والاهتمام بالتفاصيل جعلنا الخيار الموثوق للعملاء المميزين في جميع أنحاء العراق.'
@@ -88,13 +88,13 @@ const MissionSection: React.FC = () => {
             <div className="grid grid-cols-2 gap-6 sm:gap-8">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-playfair font-bold text-teal-400 mb-2">500+</div>
-                <div className="text-beige-200 font-inter text-sm sm:text-base">
+                <div className="text-gray-500 dark:text-beige-200 font-inter text-sm sm:text-base transition-colors duration-300">
                   {language === 'en' ? 'Events Delivered' : 'فعالية منجزة'}
                 </div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-playfair font-bold text-teal-400 mb-2">8+</div>
-                <div className="text-beige-200 font-inter text-sm sm:text-base">
+                <div className="text-gray-500 dark:text-beige-200 font-inter text-sm sm:text-base transition-colors duration-300">
                   {language === 'en' ? 'Years Experience' : 'سنوات خبرة'}
                 </div>
               </div>
@@ -155,7 +155,7 @@ const ValuesSection: React.FC = () => {
   ];
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-200">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-dark-200 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -163,10 +163,10 @@ const ValuesSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
             {language === 'en' ? 'Our Values' : 'قيمنا'}
           </h2>
-          <p className="text-lg sm:text-xl text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
             {language === 'en' 
               ? 'The principles that guide us in creating unforgettable experiences'
               : 'المبادئ التي ترشدنا في إنشاء تجارب لا تُنسى'
@@ -186,10 +186,10 @@ const ValuesSection: React.FC = () => {
               <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
                 <value.icon className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg sm:text-xl font-playfair font-semibold text-white mb-4">
+              <h3 className="text-lg sm:text-xl font-playfair font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                 {value.title}
               </h3>
-              <p className="text-beige-200 font-inter leading-relaxed text-sm sm:text-base">
+              <p className="text-gray-500 dark:text-beige-200 font-inter leading-relaxed text-sm sm:text-base transition-colors duration-300">
                 {value.description}
               </p>
             </motion.div>
@@ -244,7 +244,7 @@ const TeamSection: React.FC = () => {
   ];
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-100">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -252,10 +252,10 @@ const TeamSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
             {language === 'en' ? 'Meet Our Team' : 'تعرف على فريقنا'}
           </h2>
-          <p className="text-lg sm:text-xl text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
             {language === 'en' 
               ? 'The talented professionals behind every successful event'
               : 'المهنيون الموهوبون وراء كل فعالية ناجحة'
@@ -280,7 +280,7 @@ const TeamSection: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
               </div>
-              <h3 className="text-lg sm:text-xl font-playfair font-semibold text-white mb-2">
+              <h3 className="text-lg sm:text-xl font-playfair font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
                 {language === 'en' ? member.name : member.nameAr}
               </h3>
               <p className="text-teal-400 font-inter text-sm sm:text-base">
@@ -308,7 +308,7 @@ const GallerySection: React.FC = () => {
   ];
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-200">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-dark-200 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -316,10 +316,10 @@ const GallerySection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
             {language === 'en' ? 'Behind the Scenes' : 'خلف الكواليس'}
           </h2>
-          <p className="text-lg sm:text-xl text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
             {language === 'en' 
               ? 'A glimpse into our creative process and the magic we create'
               : 'نظرة على عمليتنا الإبداعية والسحر الذي نصنعه'
@@ -341,7 +341,7 @@ const GallerySection: React.FC = () => {
                 alt={`Behind the scenes ${index + 1}`}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-200/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 dark:from-dark-200/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.div>
           ))}
         </div>
@@ -388,7 +388,7 @@ const StatsSection: React.FC = () => {
               <div className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-2">
                 {stat.number}
               </div>
-              <div className="text-beige-100 font-inter text-sm sm:text-base">
+              <div className="text-gray-100 dark:text-beige-100 font-inter text-sm sm:text-base">
                 {stat.label}
               </div>
             </motion.div>

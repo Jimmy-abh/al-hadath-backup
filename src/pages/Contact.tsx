@@ -252,7 +252,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="bg-dark-200 pt-20 lg:pt-24">
+    <div className="bg-white dark:bg-dark-200 pt-20 lg:pt-24 transition-colors duration-300">
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
@@ -261,7 +261,7 @@ const Contact: React.FC = () => {
             alt="Contact us"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-dark-200/80" />
+          <div className="absolute inset-0 bg-black/50 dark:bg-dark-200/80" />
         </div>
         
         <div className="relative container mx-auto px-4 sm:px-6 text-center">
@@ -383,7 +383,7 @@ const ContactSection: React.FC<{
   ];
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-100">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6" id="contact-form-section">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -391,10 +391,10 @@ const ContactSection: React.FC<{
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
             {language === 'en' ? 'Let\'s Start Planning' : 'لنبدأ التخطيط'}
           </h2>
-          <p className="text-lg sm:text-xl text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
             {language === 'en' 
               ? 'Share your vision with us and we\'ll create a proposal tailored to your needs'
               : 'شاركنا رؤيتك وسننشئ اقتراحاً مصمماً لاحتياجاتك'
@@ -416,10 +416,10 @@ const ContactSection: React.FC<{
                   <info.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-playfair font-semibold text-white mb-2">
+                  <h3 className="text-base sm:text-lg font-playfair font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
                     {info.title}
                   </h3>
-                  <p className="text-beige-200 font-inter whitespace-pre-line text-sm sm:text-base" dir={info.title.includes('Call') || info.title.includes('اتصل') ? 'ltr' : language === 'ar' ? 'rtl' : 'ltr'}>
+                  <p className="text-gray-500 dark:text-beige-200 font-inter whitespace-pre-line text-sm sm:text-base transition-colors duration-300" dir={info.title.includes('Call') || info.title.includes('اتصل') ? 'ltr' : language === 'ar' ? 'rtl' : 'ltr'}>
                     {info.content}
                   </p>
                 </div>
@@ -428,7 +428,7 @@ const ContactSection: React.FC<{
 
             {/* Social Links */}
             <div className="pt-6 sm:pt-8">
-              <h3 className="text-base sm:text-lg font-playfair font-semibold text-white mb-4">
+              <h3 className="text-base sm:text-lg font-playfair font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                 {language === 'en' ? 'Follow Us' : 'تابعنا'}
               </h3>
               <div className="flex space-x-4 rtl:space-x-reverse">
@@ -484,10 +484,10 @@ const ContactSection: React.FC<{
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-red-500/20 border border-red-500/40 rounded-lg flex items-center space-x-3 rtl:space-x-reverse"
+                className="mb-6 p-4 bg-red-50 dark:bg-red-500/20 border border-red-200 dark:border-red-500/40 rounded-lg flex items-center space-x-3 rtl:space-x-reverse transition-colors duration-300"
               >
-                <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <p className="text-red-100 font-inter">
+                <AlertCircle className="w-5 h-5 text-red-500 dark:text-red-400 flex-shrink-0" />
+                <p className="text-red-700 dark:text-red-100 font-inter transition-colors duration-300">
                   {language === 'en' 
                     ? 'There was an error sending your message. Please try again or contact us directly.'
                     : 'حدث خطأ في إرسال رسالتك. يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة.'
@@ -499,7 +499,7 @@ const ContactSection: React.FC<{
             <form id="contact-form" onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-beige-100 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-beige-100 mb-2 transition-colors duration-300">
                     {language === 'en' ? 'Full Name *' : 'الاسم الكامل *'}
                   </label>
                   <input
@@ -509,8 +509,8 @@ const ContactSection: React.FC<{
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className={`w-full px-4 py-3 bg-dark-50 border rounded-lg text-white placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
-                      errors.name ? 'form-error border-red-500' : 'border-teal-500/20'
+                    className={`w-full px-4 py-3 bg-white dark:bg-dark-50 border rounded-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
+                      errors.name ? 'form-error border-red-500' : 'border-gray-300 dark:border-teal-500/20'
                     }`}
                     placeholder={language === 'en' ? 'Your full name' : 'اسمك الكامل'}
                     dir={language === 'ar' ? 'rtl' : 'ltr'}
@@ -521,7 +521,7 @@ const ContactSection: React.FC<{
                   )}
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-beige-100 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-beige-100 mb-2 transition-colors duration-300">
                     {language === 'en' ? 'Email Address *' : 'عنوان البريد الإلكتروني *'}
                   </label>
                   <input
@@ -531,8 +531,8 @@ const ContactSection: React.FC<{
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className={`w-full px-4 py-3 bg-dark-50 border rounded-lg text-white placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
-                      errors.email ? 'form-error border-red-500' : 'border-teal-500/20'
+                    className={`w-full px-4 py-3 bg-white dark:bg-dark-50 border rounded-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
+                      errors.email ? 'form-error border-red-500' : 'border-gray-300 dark:border-teal-500/20'
                     }`}
                     placeholder={language === 'en' ? 'your@email.com' : 'بريدك@الإلكتروني.com'}
                     dir="ltr"
@@ -546,7 +546,7 @@ const ContactSection: React.FC<{
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-beige-100 mb-2 relative">
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-beige-100 mb-2 relative transition-colors duration-300">
                     {language === 'en' ? 'Phone Number' : 'رقم الهاتف'}
                   </label>
                   <div className="relative">
@@ -555,7 +555,7 @@ const ContactSection: React.FC<{
                       <button
                         type="button"
                         onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-                        className="h-full px-3 bg-dark-300 border-r border-teal-500/20 rounded-l-lg text-white hover:bg-dark-200 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
+                        className="h-full px-3 bg-gray-100 dark:bg-dark-300 border-r border-gray-300 dark:border-teal-500/20 rounded-l-lg text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-dark-200 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
                       >
                         <span className="text-sm font-mono">{selectedCountryCode}</span>
                         <ChevronDown className="w-4 h-4" />
@@ -563,16 +563,16 @@ const ContactSection: React.FC<{
                       
                       {/* Dropdown Menu */}
                       {showCountryDropdown && (
-                        <div className="absolute top-full left-0 mt-1 bg-dark-50 border border-teal-500/20 rounded-lg shadow-lg z-10 max-h-48 overflow-y-auto min-w-[200px]">
+                        <div className="absolute top-full left-0 mt-1 bg-white dark:bg-dark-50 border border-gray-300 dark:border-teal-500/20 rounded-lg shadow-lg z-10 max-h-48 overflow-y-auto min-w-[200px] transition-colors duration-300">
                           {countryCodes.map((country) => (
                             <button
                               key={country.code}
                               type="button"
                               onClick={() => handleCountryCodeChange(country.code)}
-                              className="w-full px-3 py-2 text-left text-white hover:bg-teal-500/20 transition-colors flex items-center justify-between text-sm"
+                              className="w-full px-3 py-2 text-left text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-teal-500/20 transition-colors flex items-center justify-between text-sm"
                             >
                               <span>{country.name}</span>
-                              <span className="font-mono text-beige-300">{country.code}</span>
+                              <span className="font-mono text-gray-500 dark:text-beige-300">{country.code}</span>
                             </button>
                           ))}
                         </div>
@@ -585,8 +585,8 @@ const ContactSection: React.FC<{
                       name="phone"
                       value={formData.phone}
                       onChange={handlePhoneChange}
-                      className={`w-full pl-20 pr-4 py-3 bg-dark-50 border rounded-lg text-white placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
-                        errors.phone ? 'form-error border-red-500' : 'border-teal-500/20'
+                      className={`w-full pl-20 pr-4 py-3 bg-white dark:bg-dark-50 border rounded-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
+                        errors.phone ? 'form-error border-red-500' : 'border-gray-300 dark:border-teal-500/20'
                       }`}
                       placeholder="XXX XXX XXXX"
                       dir="ltr"
@@ -598,7 +598,7 @@ const ContactSection: React.FC<{
                   )}
                 </div>
                 <div>
-                  <label htmlFor="eventType" className="block text-sm font-medium text-beige-100 mb-2">
+                  <label htmlFor="eventType" className="block text-sm font-medium text-gray-700 dark:text-beige-100 mb-2 transition-colors duration-300">
                     {language === 'en' ? 'Event Type *' : 'نوع الفعالية *'}
                   </label>
                   <select
@@ -607,13 +607,13 @@ const ContactSection: React.FC<{
                     value={formData.eventType}
                     onChange={handleChange}
                     required
-                    className={`w-full px-4 py-3 bg-dark-50 border rounded-lg text-white focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
-                      errors.eventType ? 'form-error border-red-500' : 'border-teal-500/20'
+                    className={`w-full px-4 py-3 bg-white dark:bg-dark-50 border rounded-lg text-gray-900 dark:text-white focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base ${
+                      errors.eventType ? 'form-error border-red-500' : 'border-gray-300 dark:border-teal-500/20'
                     }`}
                     dir={language === 'ar' ? 'rtl' : 'ltr'}
                   >
                     {eventTypes.map((type) => (
-                      <option key={type.value} value={type.value} className="bg-dark-50">
+                      <option key={type.value} value={type.value} className="bg-white dark:bg-dark-50">
                         {type.label}
                       </option>
                     ))}
@@ -625,7 +625,7 @@ const ContactSection: React.FC<{
               </div>
 
               <div>
-                <label htmlFor="eventDate" className="block text-sm font-medium text-beige-100 mb-2">
+                <label htmlFor="eventDate" className="block text-sm font-medium text-gray-700 dark:text-beige-100 mb-2 transition-colors duration-300">
                   {language === 'en' ? 'Preferred Event Date' : 'تاريخ الفعالية المفضل'}
                 </label>
                 <div className="relative">
@@ -642,8 +642,8 @@ const ContactSection: React.FC<{
                     }}
                     minDate={new Date()}
                     dateFormat="yyyy-MM-dd"
-                    className={`w-full px-4 py-3 bg-dark-50 border rounded-lg text-white focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base cursor-pointer ${
-                      errors.eventDate ? 'form-error border-red-500' : 'border-teal-500/20'
+                    className={`w-full px-4 py-3 bg-white dark:bg-dark-50 border rounded-lg text-gray-900 dark:text-white focus:border-teal-500 focus:outline-none transition-colors text-sm sm:text-base cursor-pointer ${
+                      errors.eventDate ? 'form-error border-red-500' : 'border-gray-300 dark:border-teal-500/20'
                     }`}
                     placeholderText={language === 'en' ? 'Select event date' : 'اختر تاريخ الفعالية'}
                     popperClassName="date-picker-popper"
@@ -656,7 +656,7 @@ const ContactSection: React.FC<{
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-beige-100 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-beige-100 mb-2 transition-colors duration-300">
                   {language === 'en' ? 'Tell us about your event *' : 'أخبرنا عن فعاليتك *'}
                 </label>
                 <textarea
@@ -666,8 +666,8 @@ const ContactSection: React.FC<{
                   onChange={handleChange}
                   required
                   rows={6}
-                  className={`w-full px-4 py-3 bg-dark-50 border rounded-lg text-white placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors resize-none text-sm sm:text-base ${
-                    errors.message ? 'form-error border-red-500' : 'border-teal-500/20'
+                  className={`w-full px-4 py-3 bg-white dark:bg-dark-50 border rounded-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-beige-300 focus:border-teal-500 focus:outline-none transition-colors resize-none text-sm sm:text-base ${
+                    errors.message ? 'form-error border-red-500' : 'border-gray-300 dark:border-teal-500/20'
                   }`}
                   placeholder={language === 'en' 
                     ? 'Share your vision, budget, number of guests, and any special requirements...'
@@ -722,7 +722,7 @@ const SuccessModal: React.FC<{
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="relative max-w-md w-full bg-dark-100 rounded-xl border border-teal-500/20 shadow-2xl overflow-hidden"
+        className="relative max-w-md w-full bg-white dark:bg-dark-100 rounded-xl border border-gray-200 dark:border-teal-500/20 shadow-2xl overflow-hidden transition-colors duration-300"
       >
         {/* Close Button */}
         <button
@@ -745,7 +745,7 @@ const SuccessModal: React.FC<{
             {language === 'en' ? 'Thank You!' : 'شكرًا لك!'}
           </h3>
           
-          <p className="text-beige-100 font-inter leading-relaxed text-sm sm:text-base">
+          <p className="text-gray-600 dark:text-beige-100 font-inter leading-relaxed text-sm sm:text-base transition-colors duration-300">
             {language === 'en' 
               ? 'Your message has been sent. We\'ll get back to you soon.'
               : 'تم إرسال رسالتك وسنقوم بالرد عليك قريبًا.'
@@ -762,7 +762,7 @@ const MapSection: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-200">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-dark-200 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -770,10 +770,10 @@ const MapSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
             {language === 'en' ? 'Find Us' : 'اعثر علينا'}
           </h2>
-          <p className="text-lg sm:text-xl text-beige-100 max-w-4xl mx-auto font-inter mb-8 leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter mb-8 leading-relaxed transition-colors duration-300">
             {language === 'en' 
               ? 'Visit our office in the heart of Baghdad to discuss your event in person'
               : 'زُر مكتبنا في قلب بغداد لمناقشة فعاليتك شخصياً'
@@ -789,13 +789,13 @@ const MapSection: React.FC = () => {
         >
           {/* Map Title */}
           <div className="text-center">
-            <h3 className="text-2xl sm:text-3xl font-playfair font-bold text-white mb-2">
+            <h3 className="text-2xl sm:text-3xl font-playfair font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
               {language === 'en' ? 'Our Location' : 'موقعنا'}
             </h3>
           </div>
           
           {/* Google Maps Embed */}
-          <div className="relative rounded-xl overflow-hidden border border-teal-500/20 shadow-lg">
+          <div className="relative rounded-xl overflow-hidden border border-gray-200 dark:border-teal-500/20 shadow-lg transition-colors duration-300">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3334.5033435829228!2d44.36453217514455!3d33.30565405678397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15577f4941e8be31%3A0xd867ab1e0aa02cf2!2z2LTYsdmD2Kkg2KfZhNit2K_YqyDZhNiq2YbYuNmK2YUg2KfZhNmF2KTYqtmF2LHYp9iqINmI2KfZhNmF2LnYp9ix2LYgXyDYp9mE2K3Yp9ix2KzZitip!5e0!3m2!1sen!2siq!4v1752083450051!5m2!1sen!2siq" 
               width="100%" 
@@ -851,7 +851,7 @@ const OfficeHoursSection: React.FC = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
               {language === 'en' ? 'Office Hours' : 'ساعات العمل'}
             </h2>
-            <p className="text-lg sm:text-xl text-beige-100 mb-8 font-inter leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-100 dark:text-beige-100 mb-8 font-inter leading-relaxed transition-colors duration-300">
               {language === 'en' 
                 ? 'Visit us during our office hours or schedule a consultation at your convenience'
                 : 'زُرنا خلال ساعات العمل أو حدد موعداً للاستشارة في الوقت المناسب لك'
@@ -876,14 +876,14 @@ const OfficeHoursSection: React.FC = () => {
             className="space-y-4 sm:space-y-6"
           >
             {hours.map((schedule, index) => (
-              <div key={index} className="flex items-center justify-between bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6">
+              <div key={index} className="flex items-center justify-between bg-white/10 dark:bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6">
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                   <Clock className={`w-5 h-5 text-beige-100 ${language === 'ar' ? 'phone-icon' : ''}`} />
                   <span className="text-white font-inter font-medium text-sm sm:text-base">
                     {language === 'en' ? schedule.dayEn : schedule.dayAr}
                   </span>
                 </div>
-                <span className="text-beige-100 font-inter text-sm sm:text-base">
+                <span className="text-gray-100 dark:text-beige-100 font-inter text-sm sm:text-base">
                   {language === 'en' ? schedule.timeEn : schedule.timeAr}
                 </span>
               </div>

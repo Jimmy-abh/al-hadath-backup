@@ -133,7 +133,7 @@ const Services: React.FC = () => {
 
 
   return (
-    <div className="bg-dark-200 pt-20 lg:pt-24 scroll-smooth">
+    <div className="bg-white dark:bg-dark-200 pt-20 lg:pt-24 scroll-smooth transition-colors duration-300">
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
@@ -142,19 +142,19 @@ const Services: React.FC = () => {
             alt="Our services"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-dark-200/80" />
+          <div className="absolute inset-0 bg-black/50 dark:bg-dark-200/80" />
         </div>
-        
+      <section id="services-tabs" ref={ref} className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
         <div className="relative container mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-playfair font-bold text-white mb-4 sm:mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
               {t('services')}
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
               {language === 'en' 
                 ? 'Comprehensive event planning and production services tailored to your unique needs'
                 : 'خدمات تخطيط وإنتاج الفعاليات الشاملة المصممة لاحتياجاتك الفريدة'
@@ -219,7 +219,7 @@ const ServicesTabsSection: React.FC<{
               className={`flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse px-4 sm:px-6 py-3 sm:py-4 rounded-xl transition-all duration-300 text-sm sm:text-base ${
                 activeTab === index
                   ? 'bg-teal-500 text-white shadow-lg ring-2 ring-teal-400/50'
-                  : 'bg-dark-50 text-white hover:bg-dark-300 border border-teal-500/20'
+                  : 'bg-white dark:bg-dark-50 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-dark-300 border border-gray-200 dark:border-teal-500/20 transition-colors duration-300'
               }`}
               aria-label={`${language === 'en' ? 'Select' : 'اختر'} ${service.title}`}
             >
@@ -242,7 +242,7 @@ const ServiceDetailsSection: React.FC<{
   const activeService = services[activeTab];
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-200">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-dark-200 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatePresence mode="wait">
           <motion.div
@@ -258,18 +258,18 @@ const ServiceDetailsSection: React.FC<{
                   <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br ${activeService.color} rounded-xl flex items-center justify-center`}>
                     <activeService.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-playfair font-bold text-white">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-playfair font-bold text-gray-900 dark:text-white transition-colors duration-300">
                     {activeService.title}
                   </h3>
                 </div>
-                <p className="text-base sm:text-lg text-beige-100 mb-6 sm:mb-8 font-inter leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-600 dark:text-beige-100 mb-6 sm:mb-8 font-inter leading-relaxed transition-colors duration-300">
                   {activeService.description}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {activeService.features.map((feature: string, index: number) => (
                     <div key={index} className="flex items-start space-x-3">
                       <Check className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400 mt-1 flex-shrink-0" />
-                      <span className="text-beige-200 font-inter text-sm sm:text-base">{feature}</span>
+                      <span className="text-gray-500 dark:text-beige-200 font-inter text-sm sm:text-base transition-colors duration-300">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -286,21 +286,21 @@ const ServiceDetailsSection: React.FC<{
 
             {/* Service Highlights */}
             <div>
-              <h4 className="text-xl sm:text-2xl font-playfair font-bold text-white mb-6 sm:mb-8 text-center">
+              <h4 className="text-xl sm:text-2xl font-playfair font-bold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center transition-colors duration-300">
                 {language === 'en' ? 'Why Choose Our Services' : 'لماذا تختار خدماتنا'}
               </h4>
               
               {/* Service Benefits */}
-              <div className="bg-dark-50 border border-teal-500/20 rounded-xl p-6 sm:p-8 text-center">
+              <div className="bg-gray-50 dark:bg-dark-50 border border-gray-200 dark:border-teal-500/20 rounded-xl p-6 sm:p-8 text-center transition-colors duration-300">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
                   <div className="flex flex-col items-center">
                     <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center mb-4">
                       <Check className="w-6 h-6 text-white" />
                     </div>
-                    <h5 className="text-lg font-playfair font-semibold text-white mb-2">
+                    <h5 className="text-lg font-playfair font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
                       {language === 'en' ? 'Expert Team' : 'فريق خبير'}
                     </h5>
-                    <p className="text-beige-200 font-inter text-sm">
+                    <p className="text-gray-500 dark:text-beige-200 font-inter text-sm transition-colors duration-300">
                       {language === 'en' 
                         ? 'Experienced professionals dedicated to your success'
                         : 'محترفون ذوو خبرة مكرسون لنجاحك'
@@ -312,10 +312,10 @@ const ServiceDetailsSection: React.FC<{
                     <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center mb-4">
                       <Check className="w-6 h-6 text-white" />
                     </div>
-                    <h5 className="text-lg font-playfair font-semibold text-white mb-2">
+                    <h5 className="text-lg font-playfair font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
                       {language === 'en' ? 'Custom Solutions' : 'حلول مخصصة'}
                     </h5>
-                    <p className="text-beige-200 font-inter text-sm">
+                    <p className="text-gray-500 dark:text-beige-200 font-inter text-sm transition-colors duration-300">
                       {language === 'en' 
                         ? 'Tailored services to meet your unique requirements'
                         : 'خدمات مصممة خصيصاً لتلبية متطلباتك الفريدة'
@@ -327,10 +327,10 @@ const ServiceDetailsSection: React.FC<{
                     <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center mb-4">
                       <Check className="w-6 h-6 text-white" />
                     </div>
-                    <h5 className="text-lg font-playfair font-semibold text-white mb-2">
+                    <h5 className="text-lg font-playfair font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
                       {language === 'en' ? '24/7 Support' : 'دعم على مدار الساعة'}
                     </h5>
-                    <p className="text-beige-200 font-inter text-sm">
+                    <p className="text-gray-500 dark:text-beige-200 font-inter text-sm transition-colors duration-300">
                       {language === 'en' 
                         ? 'Round-the-clock assistance for your peace of mind'
                         : 'مساعدة على مدار الساعة لراحة بالك'
@@ -382,8 +382,7 @@ const ProcessSection: React.FC = () => {
     },
   ];
 
-  return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-dark-100">
+    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-dark-100 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -391,10 +390,10 @@ const ProcessSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
             {language === 'en' ? 'Our Process' : 'عمليتنا'}
           </h2>
-          <p className="text-lg sm:text-xl text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-beige-100 max-w-4xl mx-auto font-inter leading-relaxed transition-colors duration-300">
             {language === 'en' 
               ? 'A proven methodology that ensures your event exceeds expectations'
               : 'منهجية مجربة تضمن أن تتجاوز فعاليتك التوقعات'
@@ -429,7 +428,7 @@ const ProcessSection: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-teal-500 rounded-full opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-300" />
               </motion.div>
               
-              <p className="text-beige-200 font-inter leading-relaxed text-sm sm:text-base">
+              <p className="text-gray-500 dark:text-beige-200 font-inter leading-relaxed text-sm sm:text-base transition-colors duration-300">
                 {step.description}
               </p>
             </motion.div>
