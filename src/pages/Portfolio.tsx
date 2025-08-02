@@ -105,51 +105,6 @@ const Portfolio: React.FC = () => {
       descriptionEn: 'IDEX 2022 was a remarkable event that brought together industry experts, innovators, and professionals to exchange ideas, showcase projects, and strengthen collaboration. The exhibition highlighted progress, networking, and knowledge sharing in a vibrant atmosphere.',
       descriptionAr: 'كان معرض IDEX ٢٠٢٢ حدثاً مميزاً جمع الخبراء والمبتكرين والمهنيين لتبادل الأفكار وعرض المشاريع وتعزيز التعاون. وقد سلط المعرض الضوء على التقدم وبناء العلاقات وتبادل المعرفة في أجواء مليئة بالحيوية.',
     },
-    {
-      id: 7,
-      titleEn: 'Iraqi Hunting Club Annual Gathering',
-      titleAr: 'التجمع السنوي لنادي الصيد العراقي',
-      category: 'corporate',
-      location: language === 'en' ? 'Baghdad' : 'بغداد',
-      year: '2024',
-      images: [
-        'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-        'https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-        'https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      ],
-      descriptionEn: 'Annual gathering of the Iraqi Hunting Club members featuring outdoor activities, conservation discussions, and community networking.',
-      descriptionAr: 'التجمع السنوي لأعضاء نادي الصيد العراقي يضم أنشطة خارجية ومناقشات حول الحفاظ على البيئة والتواصل المجتمعي.',
-    },
-    {
-      id: 8,
-      titleEn: 'Medical Equipment Exhibition',
-      titleAr: 'معرض المعدات الطبية',
-      category: 'production',
-      location: language === 'en' ? 'Baghdad' : 'بغداد',
-      year: '2023',
-      images: [
-        'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-        'https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-        'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      ],
-      descriptionEn: 'Comprehensive exhibition showcasing the latest medical equipment and healthcare technologies for Iraqi healthcare professionals.',
-      descriptionAr: 'معرض شامل يعرض أحدث المعدات الطبية وتقنيات الرعاية الصحية للمهنيين الصحيين العراقيين.',
-    },
-    {
-      id: 9,
-      titleEn: 'Technology Innovation Summit',
-      titleAr: 'قمة الابتكار التقني',
-      category: 'production',
-      location: language === 'en' ? 'Baghdad' : 'بغداد',
-      year: '2024',
-      images: [
-        'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-        'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-        'https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      ],
-      descriptionEn: 'Summit bringing together tech innovators, entrepreneurs, and investors to explore emerging technologies and digital transformation opportunities in Iraq.',
-      descriptionAr: 'قمة تجمع مبتكري التكنولوجيا ورجال الأعمال والمستثمرين لاستكشاف التقنيات الناشئة وفرص التحول الرقمي في العراق.',
-    },
   ];
 
   const categories = [
