@@ -211,6 +211,8 @@ const TeamSection: React.FC = () => {
       role: t('teamMember1Role'),
       roleAr: t('teamMember1RoleAr'),
       image: 'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//DrAlaa.png',
+      scale: 'scale-90',
+      position: 'object-top',
     },
     {
       name: t('teamMember2Name'),
@@ -218,6 +220,8 @@ const TeamSection: React.FC = () => {
       role: t('teamMember2Role'),
       roleAr: t('teamMember2RoleAr'),
       image: 'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Mahmoud.png',
+      scale: 'scale-100',
+      position: 'object-center',
     },
     {
       name: t('teamMember3Name'),
@@ -225,6 +229,8 @@ const TeamSection: React.FC = () => {
       role: t('teamMember3Role'),
       roleAr: t('teamMember3RoleAr'),
       image: 'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Thoalnorain.png',
+      scale: 'scale-90',
+      position: 'object-top',
     },
     {
       name: t('teamMember4Name'),
@@ -232,6 +238,8 @@ const TeamSection: React.FC = () => {
       role: t('teamMember4Role'),
       roleAr: t('teamMember4RoleAr'),
       image: 'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Amin%20Raed.png',
+      scale: 'scale-90',
+      position: 'object-top',
     },
   ];
 
@@ -268,7 +276,7 @@ const TeamSection: React.FC = () => {
                 <img
                   src={member.image}
                   alt={language === 'en' ? member.name : member.nameAr}
-                  className="w-full h-64 object-cover object-center scale-90 group-hover:scale-100 transition-transform duration-500"
+                  className={`w-full h-64 object-cover ${member.position || 'object-center'} ${member.scale || 'scale-100'} group-hover:scale-100 transition-transform duration-500`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
