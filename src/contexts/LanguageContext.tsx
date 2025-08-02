@@ -45,6 +45,24 @@ const translations = {
     missionText: 'To create extraordinary experiences that exceed expectations and leave lasting impressions',
     aboutExtended: 'With years of experience in the Iraqi market, we understand the cultural nuances and requirements that make each event unique. Our team of dedicated professionals works tirelessly to ensure every detail is perfect.',
     
+    // Team Members
+    teamMember1Name: 'Dr. Alaa Hussein Rashid',
+    teamMember1NameAr: 'الدكتور علاء حسين رشيد',
+    teamMember1Role: 'Chairman',
+    teamMember1RoleAr: 'رئيس مجلس الإدارة',
+    teamMember2Name: 'Mr. Mahmoud Hussein',
+    teamMember2NameAr: 'السيد محمود حسين',
+    teamMember2Role: 'CEO',
+    teamMember2RoleAr: 'الرئيس التنفيذي',
+    teamMember3Name: 'Mr. Thunorain Tabra',
+    teamMember3NameAr: 'السيد ثونورين طبرا',
+    teamMember3Role: 'PR Director',
+    teamMember3RoleAr: 'مدير العلاقات العامة',
+    teamMember4Name: 'Mr. Ameen Raed Nazar',
+    teamMember4NameAr: 'السيد أمين رائد نزار',
+    teamMember4Role: 'Media',
+    teamMember4RoleAr: 'الإعلام',
+    
     // Testimonials
     testimonialsTitle: 'What Our Clients Say',
     testimonialsSubtitle: 'Don\'t just take our word for it – hear from our satisfied clients',
@@ -118,6 +136,24 @@ const translations = {
     missionTitle: 'مهمتنا',
     missionText: 'إنشاء تجارب استثنائية تتجاوز التوقعات وتترك انطباعات دائمة',
     aboutExtended: 'مع سنوات من الخبرة في السوق العراقية، نفهم الفروق الثقافية والمتطلبات التي تجعل كل فعالية فريدة. يعمل فريقنا من المحترفين المتفانين بلا كلل لضمان كمال كل التفاصيل.',
+    
+    // Team Members
+    teamMember1Name: 'الدكتور علاء حسين رشيد',
+    teamMember1NameAr: 'الدكتور علاء حسين رشيد',
+    teamMember1Role: 'رئيس مجلس الإدارة',
+    teamMember1RoleAr: 'رئيس مجلس الإدارة',
+    teamMember2Name: 'السيد محمود حسين',
+    teamMember2NameAr: 'السيد محمود حسين',
+    teamMember2Role: 'الرئيس التنفيذي',
+    teamMember2RoleAr: 'الرئيس التنفيذي',
+    teamMember3Name: 'السيد ثونورين طبرا',
+    teamMember3NameAr: 'السيد ثونورين طبرا',
+    teamMember3Role: 'مدير العلاقات العامة',
+    teamMember3RoleAr: 'مدير العلاقات العامة',
+    teamMember4Name: 'السيد أمين رائد نزار',
+    teamMember4NameAr: 'السيد أمين رائد نزار',
+    teamMember4Role: 'الإعلام',
+    teamMember4RoleAr: 'الإعلام',
     
     // Testimonials
     testimonialsTitle: 'ماذا يقول عملاؤنا',

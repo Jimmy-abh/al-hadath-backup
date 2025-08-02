@@ -201,37 +201,37 @@ const ValuesSection: React.FC = () => {
 };
 
 const TeamSection: React.FC = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const team = [
     {
-      name: 'Ahmed Al-Mahmoud',
-      nameAr: 'أحمد المحمود',
-      role: 'Founder & Creative Director',
-      roleAr: 'المؤسس والمدير الإبداعي',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      name: t('teamMember1Name'),
+      nameAr: t('teamMember1NameAr'),
+      role: t('teamMember1Role'),
+      roleAr: t('teamMember1RoleAr'),
+      image: 'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//DrAlaa.png',
     },
     {
-      name: 'Fatima Al-Zahra',
-      nameAr: 'فاطمة الزهراء',
-      role: 'Event Production Manager',
-      roleAr: 'مديرة إنتاج الفعاليات',
-      image: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      name: t('teamMember2Name'),
+      nameAr: t('teamMember2NameAr'),
+      role: t('teamMember2Role'),
+      roleAr: t('teamMember2RoleAr'),
+      image: 'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Mahmoud.png',
     },
     {
-      name: 'Omar Al-Baghdadi',
-      nameAr: 'عمر البغدادي',
-      role: 'Technical Director',
-      roleAr: 'المدير التقني',
-      image: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      name: t('teamMember3Name'),
+      nameAr: t('teamMember3NameAr'),
+      role: t('teamMember3Role'),
+      roleAr: t('teamMember3RoleAr'),
+      image: 'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Thoalnorain.png',
     },
     {
-      name: 'Zainab Al-Basri',
-      nameAr: 'زينب البصري',
-      role: 'Client Relations Specialist',
-      roleAr: 'أخصائية علاقات العملاء',
-      image: 'https://images.pexels.com/photos/3763152/pexels-photo-3763152.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      name: t('teamMember4Name'),
+      nameAr: t('teamMember4NameAr'),
+      role: t('teamMember4Role'),
+      roleAr: t('teamMember4RoleAr'),
+      image: 'https://eznbpoxfishlsawvnmio.supabase.co/storage/v1/object/public/alhadathevents//Amin%20Raed.png',
     },
   ];
 
